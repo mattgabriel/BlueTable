@@ -2,7 +2,7 @@
 
 class headClass {
 	
-	function displayHead($title='Dropsar',$description='',$keywords='',$css='',$js='',$otherIncludes=''){
+	function displayHead($title='Blue Table',$description='',$keywords='',$css='',$js='',$otherIncludes=''){
 		
 		if($description == ''){ $description = 'Meta description'; }
 		

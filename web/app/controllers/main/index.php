@@ -43,7 +43,7 @@ class indexClass extends Users{
 	
 	function content(){	
 			
-		return 'Home page';
+		return 'Blue Table - Home page';
 	}
 	
 	
