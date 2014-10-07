@@ -1,0 +1,128 @@
+#include <SPI.h>
+#include "Adafruit_BLE_UART.h"
+
+#define ADAFRUITBLE_REQ 10
+#define ADAFRUITBLE_RDY 2     // This should be an interrupt pin (#2 or #3)
+#define ADAFRUITBLE_RST 9
+Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
+
+int led1 = 4;
+int led2 = 7;
+
+int numberOfBytesReceived = 0;
+
+void setup(void) { 
+  Serial.begin(9600);
+  while(!Serial); // Leonardo/Micro should wait for serial init
+  Serial.println(F("Adafruit Bluefruit Low Energy nRF8001 Print echo demo"));
+
+  BTLEserial.setDeviceName("B.Table"); /* 7 characters max! */
+  
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+
+  BTLEserial.begin();
+}
+
+/**************************************************************************/
+/*    Constantly checks for new events on the nRF8001
+/**************************************************************************/
+aci_evt_opcode_t laststatus = ACI_EVT_DISCONNECTED;
+
+void loop(){
+  // Tell the nRF8001 to do whatever it should be working on.
+  BTLEserial.pollACI();
+
+  // chec current status
+  aci_evt_opcode_t status = BTLEserial.getState();
+  // If the status changed....
+  if (status != laststatus) {
+    statusActions(status);
+    // Set the last status change to this one
+    laststatus = status;
+  }
+
+  if (status == ACI_EVT_CONNECTED) {
+    // Check if there's any data being sent to us
+    receiveData();
+    // check if we need to send data
+    sendData();
+  }
+    
+}
+
+void receiveData(){
+ if (BTLEserial.available()) {
+    numberOfBytesReceived = BTLEserial.available();
+  }
+  // OK while we still have something to read, get a character and print it out
+  if(numberOfBytesReceived > 0){
+    int i = 0;
+    while (BTLEserial.available()) {
+      char c = BTLEserial.read();
+      i++;
+      if(i == numberOfBytesReceived){
+        Serial.println(c);
+        numberOfBytesReceived = 0;
+      } else {
+        Serial.print(c); 
+      }
+    }
+  } 
+}
+
+void sendData(){
+  // Check if we need to send any data (at the moment it's looking from data entered in the console
+  // But it would be done via wifi, button press...
+  if (Serial.available()) {
+    // Read a line from Serial
+    Serial.setTimeout(100); // 100 millisecond timeout
+    String s = Serial.readString();
+
+    // We need to convert the line to bytes, no more than 20 at this time
+    uint8_t sendbuffer[20];
+    s.getBytes(sendbuffer, 20);
+    char sendbuffersize = min(20, s.length());
+
+    Serial.println("Sending data..."); //data: (char *)sendbuffer
+
+    // write the data
+    BTLEserial.write(sendbuffer, sendbuffersize);
+  }
+}
+
+void statusActions(aci_evt_opcode_t status){
+  // print it out!
+  if (status == ACI_EVT_DEVICE_STARTED) {
+      Serial.println(F("* Advertising started"));
+      led(1);
+  } 
+  if (status == ACI_EVT_CONNECTED) {
+      Serial.println(F("* Connected!"));
+      led(2);
+  }
+  if (status == ACI_EVT_DISCONNECTED) {
+      Serial.println(F("* Disconnected or advertising timed out"));
+  } 
+}
+
+void led(int type){
+ switch (type) {
+    case 1: //green
+      digitalWrite(led1, HIGH);
+      digitalWrite(led2, LOW);
+      break;
+    case 2: //red
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, HIGH);
+      break;
+    case 3: //all
+      digitalWrite(led1, HIGH);
+      digitalWrite(led2, HIGH);
+      break;
+    case 4: //none/off
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      break;
+  } 
+}
