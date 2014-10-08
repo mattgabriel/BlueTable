@@ -7,9 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "UARTPeripheral.h"
+#import "UARTViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UINavigationControllerDelegate, CBCentralManagerDelegate, UARTPeripheralDelegate>
 
+typedef enum {
+    ConnectionModeNone  = 0,
+    ConnectionModeUART,
+} ConnectionMode;
+
+typedef enum {
+    ConnectionStatusDisconnected = 0,
+    ConnectionStatusScanning,
+    ConnectionStatusConnected,
+} ConnectionStatus;
+
+
+@property (nonatomic, assign) ConnectionMode                    connectionMode;
+@property (nonatomic, assign) ConnectionStatus                  connectionStatus;
+
+- (IBAction)connectButton:(id)sender;
 
 @end
 
