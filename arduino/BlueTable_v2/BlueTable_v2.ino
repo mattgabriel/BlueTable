@@ -9,7 +9,15 @@ Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RD
 int led1 = 4;
 int led2 = 7;
 
+//Table led
+int tableLed = 8;
+unsigned long blinkLastMillis = 0;
+unsigned long blinkSpeed = 500;
+int blinkLastState = 0;
+int blinkCurrentOption = 0;
+
 int numberOfBytesReceived = 0;
+String receivedString = "";
 
 void setup(void) { 
   Serial.begin(9600);
@@ -20,6 +28,7 @@ void setup(void) {
   
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
+  pinMode(tableLed, OUTPUT);
 
   BTLEserial.begin();
 }
@@ -33,7 +42,7 @@ void loop(){
   // Tell the nRF8001 to do whatever it should be working on.
   BTLEserial.pollACI();
 
-  // chec current status
+  // check current status
   aci_evt_opcode_t status = BTLEserial.getState();
   // If the status changed....
   if (status != laststatus) {
@@ -48,6 +57,8 @@ void loop(){
     // check if we need to send data
     sendData();
   }
+  
+  updateTableStatusLed();
     
 }
 
@@ -60,10 +71,13 @@ void receiveData(){
     int i = 0;
     while (BTLEserial.available()) {
       char c = BTLEserial.read();
+      receivedString = receivedString + c;
       i++;
       if(i == numberOfBytesReceived){
         Serial.println(c);
         numberOfBytesReceived = 0;
+        Serial.println(receivedString);
+        receivedString = "";
       } else {
         Serial.print(c); 
       }
@@ -95,14 +109,17 @@ void statusActions(aci_evt_opcode_t status){
   // print it out!
   if (status == ACI_EVT_DEVICE_STARTED) {
       Serial.println(F("* Advertising started"));
+      blinkCurrentOption = 1;
       led(1);
   } 
   if (status == ACI_EVT_CONNECTED) {
       Serial.println(F("* Connected!"));
+      blinkCurrentOption = 2;
       led(2);
   }
   if (status == ACI_EVT_DISCONNECTED) {
       Serial.println(F("* Disconnected or advertising timed out"));
+      blinkCurrentOption = 0;
   } 
 }
 
@@ -125,4 +142,31 @@ void led(int type){
       digitalWrite(led2, LOW);
       break;
   } 
+}
+
+void updateTableStatusLed(){
+  switch (blinkCurrentOption) {
+    case 1: //on (blink it)
+      if(millis() > (blinkLastMillis + blinkSpeed)){
+        //change state
+        blinkLastMillis = millis();
+        if(blinkLastState == 0){
+          blinkLastState = 1;
+        } else {
+          blinkLastState = 0;
+        }
+      }
+      if(blinkLastState == 0){
+        digitalWrite(tableLed, LOW);
+      } else {
+        digitalWrite(tableLed, HIGH);
+      }
+      break;
+    case 0: //off
+      digitalWrite(tableLed, LOW);
+      break;
+    case 2: //on
+      digitalWrite(tableLed, HIGH);
+      break;
+  }
 }
