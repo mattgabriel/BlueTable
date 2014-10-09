@@ -74,13 +74,11 @@ void receiveData(){
       receivedString = receivedString + c;
       i++;
       if(i == numberOfBytesReceived){
-        Serial.println(c);
+        //Serial.println(c);
         numberOfBytesReceived = 0;
         Serial.println(receivedString);
         receivedString = "";
-      } else {
-        Serial.print(c); 
-      }
+      } 
     }
   } 
 }

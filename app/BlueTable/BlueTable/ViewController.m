@@ -71,6 +71,14 @@
 
 }
 
+- (IBAction)sendDataTestButton:(id)sender {
+    
+    NSString *newString = @"UserId";
+    NSData *data = [NSData dataWithBytes:newString.UTF8String length:newString.length];
+    [self sendData:data];
+    
+}
+
 
 - (void)scanForPeripherals{
     //Look for available Bluetooth LE devices
@@ -165,6 +173,7 @@
         if(peripheral.services){
             NSLog(@"Did connect to existing peripheral %@", peripheral.name);
             [currentPeripheral peripheral:peripheral didDiscoverServices:nil]; //already discovered services, DO NOT re-discover. Just pass along the peripheral.
+            
         } else {
             NSLog(@"Did connect peripheral %@", peripheral.name);
             [currentPeripheral didConnect];
@@ -199,20 +208,15 @@
     _connectionStatus = ConnectionStatusConnected;
     
     
-    //UART mode
-    if (_connectionMode == ConnectionModeUART){
-        //self.uartViewController = [[UARTViewController alloc]initWithDelegate:self];
-        //_uartViewController.navigationItem.rightBarButtonItem = infoBarButton;
-        //[_uartViewController didConnect];
-    }
-    
     //Dismiss Alert view & update main view
     [currentAlertView dismissWithClickedButtonIndex:-1 animated:NO];
     
-    //Push appropriate viewcontroller onto the navcontroller
-    
-    
     currentAlertView = nil;
+    
+    //send UserId to Arduino via Bluetooth
+    NSString *newString = @"UserId";
+    NSData *data = [NSData dataWithBytes:newString.UTF8String length:newString.length];
+    [self sendData:data];
 }
 
 
@@ -234,18 +238,35 @@
 
 - (void)didReceiveData:(NSData*)newData{
     
-    //Data incoming from UART peripheral, forward to current view controller
+    //Data incoming from UART peripheral
     
     //Debug
-    //    NSString *hexString = [newData hexRepresentationWithSpaces:YES];
-    //    NSLog(@"Received: %@", newData);
+        //NSString *hexString = [newData hexRepresentationWithSpaces:YES];
+        //NSLog(@"Received: %@", hexString);
     
     if (_connectionStatus == ConnectionStatusConnected || _connectionStatus == ConnectionStatusScanning) {
-        //UART
-        if (_connectionMode == ConnectionModeUART) {
-            //send data to UART Controller
-            //[_uartViewController receiveData:newData];
+        //convert data to string & replace characters we can't display
+        int dataLength = (int)newData.length;
+        uint8_t data[dataLength];
+        
+        [newData getBytes:&data length:dataLength];
+        
+        for (int i = 0; i<dataLength; i++) {
+            
+            if ((data[i] <= 0x1f) || (data[i] >= 0x80)) {    //null characters
+                if ((data[i] != 0x9) && //0x9 == TAB
+                    (data[i] != 0xa) && //0xA == NL
+                    (data[i] != 0xd)) { //0xD == CR
+                    data[i] = 0xA9;
+                }
+            }
         }
+        
+        NSString *newString = [[NSString alloc]initWithBytes:&data
+                                                      length:dataLength
+                                                    encoding:NSUTF8StringEncoding];
+        NSLog(@"Received: %@",newString);
+        _receiveLabel.text = newString;
     }
 }
 

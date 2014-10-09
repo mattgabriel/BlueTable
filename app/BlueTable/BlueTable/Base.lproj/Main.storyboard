@@ -2,9 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RpK-gv-btK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--BlueTable-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
@@ -16,36 +17,95 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptb-zk-41S">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6M-WX-E8h">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Connect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="271" y="216" width="59" height="30"/>
-                                </variation>
                                 <connections>
-                                    <action selector="connectButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IUX-92-nga"/>
+                                    <action selector="connectButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fPK-Vf-PVw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p32-Sh-Yx5">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Send UserId">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendDataTestButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2Rf-Ts-Oo2"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1r-E0-Eds">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="zx3-j1-jS8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="zx3-j1-jS8"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="zx3-j1-jS8"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I6M-WX-E8h" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="35" id="1GN-RS-nMv"/>
+                            <constraint firstItem="R1r-E0-Eds" firstAttribute="leading" secondItem="I6M-WX-E8h" secondAttribute="leading" id="D2B-vr-yLp"/>
+                            <constraint firstItem="I6M-WX-E8h" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cAB-9j-t28"/>
+                            <constraint firstItem="p32-Sh-Yx5" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="35" id="lRo-Vj-VaK"/>
+                            <constraint firstItem="R1r-E0-Eds" firstAttribute="trailing" secondItem="p32-Sh-Yx5" secondAttribute="trailing" id="v41-iH-1Yn"/>
+                            <constraint firstItem="R1r-E0-Eds" firstAttribute="top" secondItem="p32-Sh-Yx5" secondAttribute="bottom" constant="73" id="vnD-CY-KJG"/>
+                            <constraint firstItem="p32-Sh-Yx5" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="xS7-Zz-Uwx"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="Ptb-zk-41S"/>
+                                <exclude reference="I6M-WX-E8h"/>
+                                <exclude reference="p32-Sh-Yx5"/>
+                                <exclude reference="R1r-E0-Eds"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="1GN-RS-nMv"/>
+                                <exclude reference="cAB-9j-t28"/>
+                                <exclude reference="D2B-vr-yLp"/>
+                                <exclude reference="v41-iH-1Yn"/>
+                                <exclude reference="vnD-CY-KJG"/>
+                                <exclude reference="lRo-Vj-VaK"/>
+                                <exclude reference="xS7-Zz-Uwx"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=regular">
+                        <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Ptb-zk-41S"/>
+                                <include reference="I6M-WX-E8h"/>
+                                <include reference="p32-Sh-Yx5"/>
+                                <include reference="R1r-E0-Eds"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="1GN-RS-nMv"/>
+                                <include reference="cAB-9j-t28"/>
+                                <include reference="D2B-vr-yLp"/>
+                                <include reference="v41-iH-1Yn"/>
+                                <include reference="vnD-CY-KJG"/>
+                                <include reference="lRo-Vj-VaK"/>
+                                <include reference="xS7-Zz-Uwx"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="N1O-V4-tBb"/>
+                    <navigationItem key="navigationItem" title="BlueTable" id="N1O-V4-tBb"/>
+                    <connections>
+                        <outlet property="receiveLabel" destination="R1r-E0-Eds" id="l4z-hu-Sn8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="140.25"/>
+            <point key="canvasLocation" x="951" y="140"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f48-UM-Ghg">

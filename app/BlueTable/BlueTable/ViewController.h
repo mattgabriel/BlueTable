@@ -29,6 +29,8 @@ typedef enum {
 @property (nonatomic, assign) ConnectionStatus                  connectionStatus;
 
 - (IBAction)connectButton:(id)sender;
+- (IBAction)sendDataTestButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *receiveLabel;
 
 @end
 
