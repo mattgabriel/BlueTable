@@ -14,7 +14,7 @@ class menu extends restService {
         if(!empty($args))
         {
             $uatm = new UserAtTableModel();
-            $menu = $uatm->getRestaurantByTableId($args['tableid']);
+            $menu = $uatm->getMenuByTableId($args['tableid']);
             if(!empty($menu))
                 echo json_encode ($menu);
         }
