@@ -16,7 +16,9 @@ class menu extends restService {
             $uatm = new UserAtTableModel();
             $menu = $uatm->getMenuByUserId($args['userid']);
             if(!empty($menu))
+            {
                 echo json_encode ($menu, true);
+            }
         }
         else
             echo 'Bad querystring!';

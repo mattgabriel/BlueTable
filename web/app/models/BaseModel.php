@@ -55,7 +55,7 @@ abstract class BaseModel implements IDataModifier{
     
     public function select($query)
     {
-        $result = $this->db->anyQuery($query);
+        $result = $this->db->retrieve_many($query);
         return $result;
     }
     
