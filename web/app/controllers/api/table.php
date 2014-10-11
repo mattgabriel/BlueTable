@@ -2,6 +2,7 @@
 
 require_once 'restService.php';
 require_once APP_PATH . 'models/TableModel.php';
+require_once APP_PATH . 'models/UserAtTable.php';
 
 class table extends restService {
     public function getStatus($params)
@@ -24,6 +25,22 @@ class table extends restService {
         }
         else
             echo 'Invalid URL';
+    }
+    
+    public function postTable ($params)
+    {
+        $args = $params[ParamTypes::PAYLOAD];
+        if(!empty($args))
+        {
+            $model = new UserAtTable();
+            $model->TableId = $args['TableId'];
+            $model->UserId = $args['UserId'];
+            $model->SeatedTime = date('Y-m-d H:i:s');
+            $model->Status = TableModel::TABLE_STATUS_SITTING;
+            $model->insert($model);
+        }
+        else
+            echo 'Bad payload';
     }
 
     protected function _setServiceName() {
