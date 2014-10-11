@@ -45,7 +45,7 @@ class justgiving {
         //"title": "Mr"
     }
     
-    public function getDonations()
+    public function getDonationAmountToDate()
     {
         //https://api.justgiving.com/{appId}/v1/account/donations?pageNum={value}&pageSize{value}
         //pageSize
@@ -75,5 +75,22 @@ class justgiving {
             "totalPages": 1,
             "totalResults": 0
         }*/
+    }
+    
+    public function listCharities(){
+        //Get user inerests https://api.justgiving.com/{appId}/v1/account/interest
+        //https://api.justgiving.com/{appId}/v1/onesearch
+        /*q (String)
+        Your search term or terms
+        g (Boolean)
+        Allows you to group search results by index
+        i (String)
+        Narrow search results by index: Charity, Event, Fundraiser, Globalproject, LocalProject
+        limit (Integer (32bit))
+        Maximum number of search results to return
+        offset (Integer (32bit))
+        The result paging offset
+        country (String)
+        Two letter ISO country code for localised results*/
     }
 }
