@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class User extends BaseModel 
+class UserModel extends BaseModel 
 {
     public $AutoId;
     public $UserId;

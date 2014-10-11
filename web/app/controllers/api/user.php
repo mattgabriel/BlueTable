@@ -2,7 +2,7 @@
 
 require_once 'restService.php';
 
-class user extends restService {
+class UserModel extends restService {
     function __construct($params=''){
         parent::__construct();
     }
