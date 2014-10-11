@@ -13,8 +13,8 @@ function _index() {
 	return $return;
 }
 
-class indexClass extends Users{
-	public $users;
+class indexClass extends User{
+	public $user;
 	public $library;
 	public $error;
 			
@@ -31,7 +31,7 @@ class indexClass extends Users{
 		$this->library = new libraryClass();
 		require_once(APP_PATH.'library/config.php');
 		$this->config = new configClass();
-		$this->users = new Users();
+		$this->user = new User();
 
 		//set output
 		$view->set('head',$head->displayHead(null,null,null,null,''));
