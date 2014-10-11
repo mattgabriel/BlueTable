@@ -162,3 +162,17 @@ CREATE TABLE IF NOT EXISTS `UserAtTable` (
     PRIMARY KEY (`AutoId`),
     UNIQUE (`UserId`, `TableId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Menu`
+--
+
+CREATE TABLE IF NOT EXISTS `MenuItemInOrder` (
+    `AutoId` int(11) NOT NULL AUTO_INCREMENT,
+    `OrderId` varchar(50) NOT NULL,
+    `MenuItemId` varchar(50) NOT NULL,
+    PRIMARY KEY (`AutoId`),
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
