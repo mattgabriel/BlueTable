@@ -1,8 +1,9 @@
 <?php
 
 require_once 'BaseModel.php';
+require_once 'QueryBuilder.php';
 
-class Tables extends BaseModel 
+class TableModel extends BaseModel 
 {
     public $AutoId;
     public $RestaurantId;
@@ -15,12 +16,21 @@ class Tables extends BaseModel
     CONST TABLE_STATUS_DRINKS_SERVED = 2;
     CONST TABLE_STATUS_FOOD_SERVED = 3;
     CONST TABLE_STATUS_DESSERT_SERVED = 4;
-    CONST TABLE_STATUS_PAYED = 5;
+    CONST TABLE_STATUS_PAID = 5;
     CONST TABLE_STATUS_AWAITING_CLEANING = 6;
+    CONST TABLE_STATUS_ERROR = 99;
     
     public function __construct() {
         //call parent with primary key name "AutoId", table name "Users"
         //and function that returns the pdo handler named "getdbh"
         parent::__construct('AutoId', 'Tables');
+    }
+    
+    public function getTableByTableId($TableId)
+    {
+        $qb = new QueryBuilder();
+        $qb->select('*')->from('Table')->where('TableId = "'.$TableId.'"');
+        $data = $this->select($qb->get());
+        return $this->arr2obj($data);
     }
 }

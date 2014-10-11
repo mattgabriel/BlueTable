@@ -11,7 +11,10 @@ class test extends restService {
         parent::__construct($params);
     }
     
-    function getTest(){
-        echo 'test';
+    function postTest($params){
+        echo 'QueryString: ' . json_encode($params[ParamTypes::QUERY_STR]) . '</br>'; 
+        echo 'URI Params: ' . json_encode($params[ParamTypes::URI_PARAMS]) . '</br>';
+        echo 'Payload: ' . json_encode($params[ParamTypes::PAYLOAD]) . '</br>';
     }
+    
 }

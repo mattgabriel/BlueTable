@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `UserAtTable` (
     `UserId` varchar(50) NOT NULL,
     `TableId` varchar(30) NOT NULL,
     `TableStatus` int(1) NOT NULL DEFAULT 0 COMMENT '',
+    `SeatedTime` datetime NOT NULL,
     PRIMARY KEY (`AutoId`),
     UNIQUE (`UserId`, `TableId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;

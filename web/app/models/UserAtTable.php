@@ -7,6 +7,7 @@ class UserAtTable extends BaseModel
     public $AutoId;
     public $UserId;
     public $TableId;
+    public $SeatedTime;
     public $Status;
 	
     public function __construct() {

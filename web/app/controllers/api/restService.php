@@ -11,6 +11,7 @@ abstract class restService {
     );
     
     private $_function = '';
+    private $_parameters = '';
 
     /**
      * Property: method
@@ -68,7 +69,6 @@ abstract class restService {
     }
 
     public function __construct($params) {
-        if(!empty($params)){$this->_function = $params[0];}
         $this->_loadConstants();
         $this->_setServiceName();
 
@@ -76,17 +76,19 @@ abstract class restService {
         header("Access-Control-Allow-Methods: *");
         header("Content-Type: application/json");
         
+        $this->_getCalledMethod(array_shift($params));
+        $this->_getParameters($params);
         $this->_getHTTPMethod();
         $this->_performRequest();
 
         
     }
 
-    private function callMethod($payload) {
+    private function callMethod() {
         $methodToCall = $this->_getMethodName($this->method, $this->_function);
         if (method_exists($this, $methodToCall)) {
             try{
-                $this->{$methodToCall}($payload);
+                $this->{$methodToCall}($this->_parameters);
             }
             catch(Exception $e){
                 $this->_generateResponse('Error', ResponseCode::INT_SERVER_ERROR);
@@ -115,7 +117,7 @@ abstract class restService {
                 $clean_input[$k] = $this->_cleanInputs($v);
             }
         } else {
-            $clean_input = trim(strip_tags(add_slashes($data)));
+            $clean_input = trim(strip_tags(addslashes($data)));
         }
         return $clean_input;
     }
@@ -127,22 +129,10 @@ abstract class restService {
     private function _performRequest() {
         switch ($this->method) {
             case 'DELETE':
-                $payload = $this->_cleanInputs($_GET);
-                $this->callMethod($payload);
-                break;
             case 'POST':
-                $payload = $this->_cleanInputs($_POST);
-                $this->callMethod($payload);
-                //call user method?
-                break;
             case 'GET':
-                $payload = $this->_cleanInputs($_GET);
-                $this->callMethod($payload);
-                break;
             case 'PUT':
-                $payload = $this->_cleanInputs($_GET);
-                //$this->file = file_get_contents("php://input");
-                $this->callMethod($payload);
+                $this->callMethod();
                 break;
             default:
                 $this->_generateResponse('Invalid Method', ResponseCode::METHOD_NOT_ALLOWED);
@@ -163,6 +153,42 @@ abstract class restService {
             }
         }
     }
+    
+    private function _getParameters($uriParams) {
+        $parameters = array();
+        $querystring = array();
+ 
+        // first of all, pull the GET vars
+        if (isset($_SERVER['QUERY_STRING'])) {
+            parse_str($_SERVER['QUERY_STRING'], $querystring);
+        }
+        
+        $parameters[ParamTypes::QUERY_STR] = $this->_cleanInputs($querystring);
+ 
+        //Get payload info
+        $payload = ($_POST ? $_POST : file_get_contents("php://input"));
+        $parameters[ParamTypes::PAYLOAD] = $this->_cleanInputs(json_decode($payload));
+        
+        //Parse uri params for query strings
+        if(isset($uriParams))
+        {
+            $lastelem = preg_replace('/\?.*/', '', end($uriParams));
+            array_pop($uriParams);
+            $uriParams[] = $lastelem;
+        }
+        $parameters[ParamTypes::URI_PARAMS] = $this->_cleanInputs($uriParams);
+        
+        $this->_parameters = $parameters;
+    }
+    
+    private function _getCalledMethod($params)
+    {
+        if($params)
+            $this->_function = $params;
+        else
+            $this->_function = get_called_class();
+    }
+            
 }
 
 class ResponseCode {
@@ -170,4 +196,10 @@ class ResponseCode {
     CONST NOT_FOUND = 404;
     CONST METHOD_NOT_ALLOWED=405;
     CONST INT_SERVER_ERROR=500;
+}
+
+class ParamTypes {
+    CONST QUERY_STR = 0;
+    CONST URI_PARAMS = 1;
+    CONST PAYLOAD = 2;
 }

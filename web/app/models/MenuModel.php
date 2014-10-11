@@ -2,7 +2,7 @@
 
 require_once 'BaseModel.php';
 
-class Menu extends BaseModel 
+class MenuModel extends BaseModel 
 {
     public $AutoId;
     public $RestaurantId;
