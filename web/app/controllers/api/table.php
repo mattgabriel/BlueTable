@@ -4,10 +4,6 @@ require_once 'restService.php';
 require_once APP_PATH . 'models/TableModel.php';
 
 class table extends restService {
-    function __construct($params) {
-        parent::__construct($params);
-    }
-    
     public function getStatus($params)
     {
         $tableid = null;
