@@ -29,7 +29,7 @@ class TableModel extends BaseModel
     public function getTableByTableId($TableId)
     {
         $qb = new QueryBuilder();
-        $qb->select('*')->from('Table')->where('TableId = "'.$TableId.'"');
+        $qb->select('*')->from('Tables')->where('TableId = "'.$TableId.'"');
         $data = $this->select($qb->get());
         return $this->arr2obj($data);
     }
