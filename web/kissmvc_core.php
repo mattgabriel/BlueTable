@@ -52,10 +52,12 @@ abstract class KISS_Controller {
 		  $this->request_not_found('Invalid function name: '.$function);
 		} else {
 			require($controllerfile);
-			if (!function_exists($function)){
-		  		$this->request_not_found('Function not found: '.$function);
+			if(function_exists($function)){
+                            call_user_func_array($function,$this->params);
+                        } elseif (class_exists($this->action)){
+                            call_user_func_array(array($this->action, $function),$this->params);
 			} else {
-				call_user_func_array($function,$this->params);
+                            $this->request_not_found('Function not found: '.$function);
 			}
 		}		
 	}

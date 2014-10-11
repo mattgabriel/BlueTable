@@ -67,9 +67,7 @@ abstract class restService {
         return $fn;
     }
 
-    public function __construct($params) {
-        
-        $this->_function = $params[0];
+    public function __construct() {
         $this->_loadConstants();
         $this->_setServiceName();
 
@@ -84,7 +82,7 @@ abstract class restService {
     }
 
     private function callMethod($param) {
-        $methodToCall = $this->_getMethodName($this->method, $this->_function);
+        $methodToCall = $this->_getMethodName($this->method, get_class());
         if (method_exists($this, $methodToCall)) {
             try{
                 $this->{$methodToCall}($param);

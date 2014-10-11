@@ -7,7 +7,7 @@ class test extends restService {
         
     }
 
-    function __test($params){
+    function __construct($params){
         parent::__construct($params);
     }
     

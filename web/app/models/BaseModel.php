@@ -1,7 +1,6 @@
 <?php
 
 require_once 'DBObject.php';
-require_once 'ICacheModel.php';
 require_once 'IDataModifier.php';
 require_once 'QueryBuilder.php';
 
