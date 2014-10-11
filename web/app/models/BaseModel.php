@@ -11,7 +11,6 @@ abstract class BaseModel implements IDataModifier{
     
     function __construct($pkname, $tablename) {
         $this->db = new DBObject($pkname, $tablename);
-        $this->resetObject();
     }
     
     public function getColumnNames(){
@@ -23,21 +22,19 @@ abstract class BaseModel implements IDataModifier{
     
     public function resetObject()
     {
-        foreach($this->getColumnNames() as $key)
-        {
-            $this->db->rs[$key] = null;
-        }
+        $this->db->rs = array();
     }
     
     public function update($data)
     {
-        
+        $this->resetObject();
         $this->setData($data);
-        return $this->db->update2();
+        return $this->db->update();
     }
     
     public function insert($data)
     {
+        $this->resetObject();
         //Set auto increment pk
         if(is_array($data)){
             $data[$this->db->getPKName()]=null;
@@ -52,6 +49,7 @@ abstract class BaseModel implements IDataModifier{
     
     public function delete($data)
     {
+        $this->resetObject();
         $this->setData($data);
         return $this->db->delete();
     }
