@@ -16,8 +16,6 @@ class table extends restService {
             if(!empty($data))
             {
                 $row = $data[0];
-                var_dump($data);
-                exit();
                 if($row->TableStatus == TableModel::TABLE_STATUS_PAID)
                     $model->update(array('AutoId'=>$row->AutoId, 'TableStatus'=>TableModel::TABLE_STATUS_AWAITING_CLEANING));
             }
