@@ -86,7 +86,6 @@ abstract class restService {
 
     private function callMethod() {
         $methodToCall = $this->_getMethodName($this->method, $this->_function);
-        echo $methodToCall;
         if (method_exists($this, $methodToCall)) {
             try{
                 $this->{$methodToCall}($this->_parameters);
