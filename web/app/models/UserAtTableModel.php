@@ -20,7 +20,7 @@ class UserAtTableModel extends BaseModel
     public function getMenuByUserId($userid)
     {
         $qb = new QueryBuilder();
-        $qb->select('C.* FROM UserAtTable A
+        $qb->select('D.* FROM UserAtTable A
                      JOIN Tables B
                      ON A.TableId = B.TableId
                      JOIN Menu C
