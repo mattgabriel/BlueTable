@@ -23,7 +23,7 @@ class TableModel extends BaseModel
     public function __construct() {
         //call parent with primary key name "AutoId", table name "Users"
         //and function that returns the pdo handler named "getdbh"
-        parent::__construct('AutoId', 'Table');
+        parent::__construct('AutoId', 'Tables');
     }
     
     public function getTableByTableId($TableId)

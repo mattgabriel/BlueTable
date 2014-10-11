@@ -28,12 +28,11 @@ ALTER TABLE `Restaurants` ADD INDEX (RestaurantId);
 -- Table structure for table `Restaurants`
 --
 
-CREATE TABLE IF NOT EXISTS `Table` (
+CREATE TABLE IF NOT EXISTS `Tables` (
     `AutoId` int(11) NOT NULL AUTO_INCREMENT,
     `RestaurantId` varchar(50) NOT NULL,
     `TableId` varchar(50) NOT NULL,
     `TableNumber` int(3) NOT NULL,
-    `TableStatus` int(1) NOT NULL DEFAULT 0,
     PRIMARY KEY (`AutoId`),
     UNIQUE (`TableId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
@@ -192,3 +191,19 @@ CREATE TABLE IF NOT EXISTS `User` (
     UNIQUE (`UserId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 ALTER TABLE `User` ADD INDEX (UserId);
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `UserAtTable`
+--
+
+CREATE TABLE IF NOT EXISTS `UserAtTable` (
+    `AutoId` int(11) NOT NULL AUTO_INCREMENT,
+    `UserId` varchar(50) NOT NULL,
+    `TableId` varchar(30) NOT NULL,
+    `TableStatus` int(1) NOT NULL DEFAULT 0 COMMENT '',
+    PRIMARY KEY (`AutoId`),
+    UNIQUE (`UserId`, `TableId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
