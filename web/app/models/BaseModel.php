@@ -55,7 +55,7 @@ abstract class BaseModel implements IDataModifier{
     
     public function select($query)
     {
-        $result = $this->db->anyQuery($query, PDO::FETCH_ASSOC);
+        $result = $this->db->anyQuery($query);
         return $result;
     }
     
