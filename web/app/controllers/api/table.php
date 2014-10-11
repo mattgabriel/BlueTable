@@ -2,7 +2,7 @@
 
 require_once 'restService.php';
 require_once APP_PATH . 'models/TableModel.php';
-require_once APP_PATH . 'models/UserAtTable.php';
+require_once APP_PATH . 'models/UserAtTableModel.php';
 
 class table extends restService {
     public function getStatus($params)
@@ -32,7 +32,7 @@ class table extends restService {
         $args = $params[ParamTypes::PAYLOAD];
         if(!empty($args))
         {
-            $model = new UserAtTable();
+            $model = new UserAtTableModel();
             $model->TableId = $args['TableId'];
             $model->UserId = $args['UserId'];
             $model->SeatedTime = date('Y-m-d H:i:s');
