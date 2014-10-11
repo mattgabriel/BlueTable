@@ -86,6 +86,7 @@ abstract class restService {
 
     private function callMethod() {
         $methodToCall = $this->_getMethodName($this->method, $this->_function);
+        echo $methodToCall;
         if (method_exists($this, $methodToCall)) {
             try{
                 $this->{$methodToCall}($this->_parameters);
@@ -167,7 +168,7 @@ abstract class restService {
  
         //Get payload info
         $payload = ($_POST ? $_POST : file_get_contents("php://input"));
-        $parameters[ParamTypes::PAYLOAD] = $this->_cleanInputs(json_decode($payload));
+        $parameters[ParamTypes::PAYLOAD] = json_decode($this->_cleanInputs($payload));
         
         //Parse uri params for query strings
         if(isset($uriParams))
