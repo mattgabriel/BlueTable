@@ -2,7 +2,7 @@
 //path: 		main/index.php
 //class name: 	indexClass
 define('PAGE_NAME','index');
-define('MODEL_NAME','Users');
+define('MODEL_NAME','User');
 define('PAGE_PATH','main/index');
 require_once(APP_PATH.'models/'.MODEL_NAME.'.php');
 
