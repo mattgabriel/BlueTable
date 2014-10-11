@@ -14,4 +14,5 @@ class test extends restService {
     function getTest(){
         echo 'test';
     }
+    
 }

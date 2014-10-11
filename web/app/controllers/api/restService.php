@@ -11,6 +11,7 @@ abstract class restService {
     );
     
     private $_function = '';
+    private $_parameters = '';
 
     /**
      * Property: method
@@ -68,7 +69,6 @@ abstract class restService {
     }
 
     public function __construct($params) {
-        if(!empty($params)){$this->_function = $params[0];}
         $this->_loadConstants();
         $this->_setServiceName();
 
@@ -76,6 +76,8 @@ abstract class restService {
         header("Access-Control-Allow-Methods: *");
         header("Content-Type: application/json");
         
+        $this->_getCalledMethod(array_shift($params));
+        $this->_getParameters($params);
         $this->_getHTTPMethod();
         $this->_performRequest();
 
@@ -86,7 +88,7 @@ abstract class restService {
         $methodToCall = $this->_getMethodName($this->method, $this->_function);
         if (method_exists($this, $methodToCall)) {
             try{
-                $this->{$methodToCall}($payload);
+                $this->{$methodToCall}($this->_parameters);
             }
             catch(Exception $e){
                 $this->_generateResponse('Error', ResponseCode::INT_SERVER_ERROR);
@@ -141,7 +143,7 @@ abstract class restService {
                 break;
             case 'PUT':
                 $payload = $this->_cleanInputs($_GET);
-                //$this->file = file_get_contents("php://input");
+                $this->file = file_get_contents("php://input");
                 $this->callMethod($payload);
                 break;
             default:
@@ -163,6 +165,35 @@ abstract class restService {
             }
         }
     }
+    
+    private function _getParameters($uriParams) {
+        $parameters = array();
+        $querystring = array();
+ 
+        // first of all, pull the GET vars
+        if (isset($_SERVER['QUERY_STRING'])) {
+            parse_str($_SERVER['QUERY_STRING'], $querystring);
+        }
+        
+        $parameters[ParamTypes::QUERY_STR] = $querystring;
+ 
+        //Get payload info
+        $body = file_get_contents("php://input");
+        $parameters[ParamTypes::PAYLOAD] = json_decode($body);
+        
+        $parameters[ParamTypes::URI_PARAMS] = $uriParams;
+        
+        $this->_parameters = $parameters;
+    }
+    
+    private function _getCalledMethod($params)
+    {
+        if($params)
+            $this->_function = $params;
+        else
+            $this->_function = get_called_class();
+    }
+            
 }
 
 class ResponseCode {
@@ -170,4 +201,10 @@ class ResponseCode {
     CONST NOT_FOUND = 404;
     CONST METHOD_NOT_ALLOWED=405;
     CONST INT_SERVER_ERROR=500;
+}
+
+class ParamTypes {
+    CONST QUERY_STR = 0;
+    CONST URI_PARAMS = 1;
+    CONST PAYLOAD = 2;
 }
