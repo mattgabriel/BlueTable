@@ -1,5 +1,5 @@
 <?php
-require_once 'controllerObject';
+require_once 'controllerObject.php';
 
 class RestaurantDetails extends controllerObject
 {
