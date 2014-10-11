@@ -84,7 +84,7 @@ abstract class restService {
         
     }
 
-    private function callMethod($payload) {
+    private function callMethod() {
         $methodToCall = $this->_getMethodName($this->method, $this->_function);
         if (method_exists($this, $methodToCall)) {
             try{
@@ -129,22 +129,10 @@ abstract class restService {
     private function _performRequest() {
         switch ($this->method) {
             case 'DELETE':
-                $payload = $this->_cleanInputs($_GET);
-                $this->callMethod($payload);
-                break;
             case 'POST':
-                $payload = $this->_cleanInputs($_POST);
-                $this->callMethod($payload);
-                //call user method?
-                break;
             case 'GET':
-                $payload = $this->_cleanInputs($_GET);
-                $this->callMethod($payload);
-                break;
             case 'PUT':
-                $payload = $this->_cleanInputs($_GET);
-                $this->file = file_get_contents("php://input");
-                $this->callMethod($payload);
+                $this->callMethod();
                 break;
             default:
                 $this->_generateResponse('Invalid Method', ResponseCode::METHOD_NOT_ALLOWED);
@@ -178,9 +166,16 @@ abstract class restService {
         $parameters[ParamTypes::QUERY_STR] = $querystring;
  
         //Get payload info
-        $body = file_get_contents("php://input");
-        $parameters[ParamTypes::PAYLOAD] = json_decode($body);
+        $payload = ($_POST ? $_POST : file_get_contents("php://input"));
+        $parameters[ParamTypes::PAYLOAD] = json_decode($payload);
         
+        //Parse uri params for query strings
+        if(isset($uriParams))
+        {
+            $lastelem = preg_replace('/\?.*/', '', end($uriParams));
+            array_pop($uriParams);
+            $uriParams[] = $lastelem;
+        }
         $parameters[ParamTypes::URI_PARAMS] = $uriParams;
         
         $this->_parameters = $parameters;
