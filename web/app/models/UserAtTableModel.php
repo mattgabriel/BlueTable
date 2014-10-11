@@ -17,15 +17,17 @@ class UserAtTableModel extends BaseModel
         parent::__construct('AutoId', 'UserAtTable');
     }
     
-    public function getMenuByTableId($tableid)
+    public function getMenuByUserId($userid)
     {
         $qb = new QueryBuilder();
         $qb->select('C.* FROM UserAtTable A
-                     JOIN Menu B
-                     ON A.RestaurantId = B.RestaurantId
-                     JOIN MenuItem C
-                     ON B.MenuId = C.MenuId
-                     WHERE A.TableId = "'.$tableid.'"');
+                     JOIN Tables B
+                     ON A.TableId = B.TableId
+                     JOIN Menu C
+                     ON B.RestaurantId = C.RestaurantId
+                     JOIN MenuItem D
+                     ON C.MenuId = D.MenuId
+                     WHERE A.UserID = "'.$userid.'"');
         return $this->select($qb->get());
     }
 }
