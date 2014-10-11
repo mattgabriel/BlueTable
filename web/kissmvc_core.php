@@ -250,7 +250,9 @@ abstract class KISS_Model  {
     $dbh=$this->getdbh();
     $s='';
     foreach ($this->rs as $k => $v)
-      $s .= ','.$this->enquote($k).'=?';
+    {
+        if(isset($v)){$s .= ','.$this->enquote($k).'=?';}
+    }
     $s = substr($s,1);
     $sql = 'UPDATE '.$this->enquote($this->tablename).' SET '.$s.' WHERE '.$this->enquote($this->pkname).'=?';
     $stmt = $dbh->prepare($sql);
@@ -368,6 +370,52 @@ abstract class KISS_Model  {
     return $stmt->fetchAll($pdo_fetch_mode);
   }
   
-  
-  
+  /**
+     * Start the transaction
+     * 
+     * @throws PDOException
+     * @return void
+     */
+    public function startTransaction() {
+        $dbh = $this->getdbh();
+
+        try {
+            $dbh->beginTransaction();
+        } catch (PDOException $exc) {
+            Ewb_Logger::getInstance()->warning($exc->getCode() . ':' . $exc->getMessage(), 2, __FILE__, __LINE__);
+            throw $exc;
+        }
+    }
+    
+    /**
+     * Commit the transaction
+     * 
+     * @throws PDOException
+     * @return void
+     */
+    public function endTransaction() {
+        $dbh = $this->getdbh();
+
+        try {
+            if (!$dbh->commit()) {
+                $dbh->rollBack();
+            }
+        } catch (PDOException $exc) {
+            $dbh->rollBack();
+            Ewb_Logger::getInstance()->warning($exc->getCode() . ':' . $exc->getMessage(), 2, __FILE__, __LINE__);
+            throw $exc;
+        }
+    }
+    
+    public function abandonTransaction(){
+        //try catch req?
+        $dbh = $this->getdbh();
+
+        try {
+            $dbh->rollBack();
+        } catch (PDOException $exc) {
+            Ewb_Logger::getInstance()->warning($exc->getCode() . ':' . $exc->getMessage(), 2, __FILE__, __LINE__);
+            throw $exc;
+        }
+    }
 }
