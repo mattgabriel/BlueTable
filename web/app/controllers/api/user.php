@@ -1,13 +1,23 @@
 <?php
 
 require_once 'restService.php';
+require_once APP_PATH . 'models/UserModel.php';
 
 class UserModel extends restService {
-    function __construct($params=''){
-        parent::__construct();
+    function __construct($params){
+        parent::__construct($params);
     }
     
     protected function _setServiceName() {
+        
+    }
+    
+    private function putUser($params){
+        //Login with paypal
+    }
+    
+    private function getLogin($params){
+        $args = $params[ParamTypes::QUERY_STR];
         
     }
     

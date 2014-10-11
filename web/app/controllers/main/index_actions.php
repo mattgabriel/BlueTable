@@ -2,9 +2,8 @@
 //path: 		main/index_actions.php
 //class name: 	index_actionsClass
 define('PAGE_NAME','index_actions');
-//define('MODEL_NAME','Users');
 define('PAGE_PATH','main/index_actions');
-//require_once(APP_PATH.'models/'.MODEL_NAME.'.php');
+require_once(APP_PATH.'models/UserModel.php');
 
 
 //loads the class below
@@ -25,7 +24,7 @@ class index_actionsClass {
 		require_once(APP_PATH.'library/config.php');
 		$this->config = new configClass();
 		require_once(APP_PATH.'models/Users.php');
-		$this->users = new Users();
+		$this->users = new UserModel();
 		
 		
 		//if there is an action attached as POST

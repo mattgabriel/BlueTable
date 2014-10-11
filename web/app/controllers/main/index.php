@@ -2,9 +2,8 @@
 //path: 		main/index.php
 //class name: 	indexClass
 define('PAGE_NAME','index');
-define('MODEL_NAME','User');
 define('PAGE_PATH','main/index');
-require_once(APP_PATH.'models/'.MODEL_NAME.'.php');
+require_once(APP_PATH.'models/UserModel.php');
 
 //loads the class below
 function _index() {
@@ -13,8 +12,7 @@ function _index() {
 	return $return;
 }
 
-class indexClass extends User{
-	public $user;
+class indexClass{
 	public $library;
 	public $error;
 			
@@ -31,7 +29,7 @@ class indexClass extends User{
 		$this->library = new libraryClass();
 		require_once(APP_PATH.'library/config.php');
 		$this->config = new configClass();
-		$this->user = new User();
+		$this->user = new UserModel();
 
 		//set output
 		$view->set('head',$head->displayHead(null,null,null,null,''));
