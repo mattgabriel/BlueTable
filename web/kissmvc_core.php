@@ -369,7 +369,8 @@ abstract class KISS_Model  {
     $sql = $query;
     $stmt = $dbh->prepare($sql); 
     $stmt->execute();
-    return $stmt->fetchAll($pdo_fetch_mode);
+    $result = $stmt->fetchAll($pdo_fetch_mode);
+    return $result;
   }
   
   /**

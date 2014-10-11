@@ -55,8 +55,8 @@ abstract class BaseModel implements IDataModifier{
     
     public function select($query)
     {
-        //execute select on cache?
-        return $this->db->anyQuery($query);
+        $result = $this->db->anyQuery($query);
+        return $result;
     }
     
     private function setData($data){

@@ -53,57 +53,12 @@ CREATE TABLE IF NOT EXISTS `Order` (
     `TableId` varchar(50) NOT NULL,
     `MenuItemsIds` varchar(1000) NOT NULL,
     `TotalPrice` DECIMAL(10, 2) NOT NULL,
+    `Status` tinyint(1) NOT NULL DEFAULT 1,
     `Date` datetime NOT NULL,
     PRIMARY KEY (`AutoId`),
     UNIQUE (`OrderId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 ALTER TABLE `Order` ADD INDEX (OrderId);
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Order`
---
-
-CREATE TABLE IF NOT EXISTS `Bill` (
-    `AutoId` int(11) NOT NULL AUTO_INCREMENT,
-    `BillId` varchar(50) NOT NULL,
-    `RestaurantId` varchar(50) NOT NULL,
-    `UserId` varchar(50) NOT NULL,
-    `OrderId` varchar(50) NOT NULL,
-    `Status` int(1) NOT NULL DEFAULT 0,
-    `Price` DECIMAL(10, 2) NOT NULL,
-    `NeedToPrintReceipt` TINYINT(1) NOT NULL,
-    `ReceiptWasPrinted` TINYINT(1) NOT NULL,
-    `Date` datetime NOT NULL,
-    PRIMARY KEY (`AutoId`),
-    UNIQUE (`BillId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-ALTER TABLE `Bill` ADD INDEX (BillId);
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Order`
---
-
-CREATE TABLE IF NOT EXISTS `Bill` (
-    `AutoId` int(11) NOT NULL AUTO_INCREMENT,
-    `BillId` varchar(50) NOT NULL,
-    `RestaurantId` varchar(50) NOT NULL,
-    `UserId` varchar(50) NOT NULL,
-    `OrderId` varchar(50) NOT NULL,
-    `Status` int(1) NOT NULL DEFAULT 0,
-    `Price` DECIMAL(10, 2) NOT NULL,
-    `NeedToPrintReceipt` TINYINT(1) NOT NULL,
-    `ReceiptWasPrinted` TINYINT(1) NOT NULL,
-    `Date` datetime NOT NULL,
-    PRIMARY KEY (`AutoId`),
-    UNIQUE (`BillId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-ALTER TABLE `Bill` ADD INDEX (BillId);
 
 
 -- --------------------------------------------------------
@@ -127,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `Bill` (
     UNIQUE (`BillId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 ALTER TABLE `Bill` ADD INDEX (BillId);
-
 
 -- --------------------------------------------------------
 

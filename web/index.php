@@ -59,7 +59,7 @@ function getdbh() {
   if (!isset($GLOBALS['dbh']))
     try {
       //$GLOBALS['dbh'] = new PDO('sqlite:'.APP_PATH.'db/kissmvc.sqlite');
-      $GLOBALS['dbh'] = new PDO('mysql:host=localhost;dbname=BlueTable', 'root', 'Blu3Tabl3');
+      $GLOBALS['dbh'] = new PDO('mysql:host=localhost;dbname=BlueTable', 'root', 'root');
 
     } catch (PDOException $e) {
       die('Connection failed: '.$e->getMessage());

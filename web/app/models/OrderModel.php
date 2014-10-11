@@ -11,7 +11,11 @@ class OrderModel extends BaseModel
     public $TableId;
     public $MenuItemsIds;
     public $TotalPrice;
+    public $Status;
     public $Date;
+    
+    CONST STATUS_CLOSED = 2;
+    CONST STATUS_OPEN = 1;
 
     public function __construct() {
         //call parent with primary key name "AutoId", table name "Users"

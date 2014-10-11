@@ -6,11 +6,11 @@
     </head>
     <body>
         <div>
-            <div id = "tableDiv" style = "float: left; width: 33%; background-color: #bbb;">
-                a
+            <div id = "freeTableDiv" style = "float: left; width: 33%; background-color: #bbb;">
+            </div>
+            <div id = "occupiedTableDiv" style = "float: left; width: 33%; background-color: #bbb;">
             </div>
             <div id = "priceIn" style = "float: left; width: 33%; background-color: #ccc;">
-                b
             </div>
         </div>
 
