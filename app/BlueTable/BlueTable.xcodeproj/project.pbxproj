@@ -18,6 +18,11 @@
 		C527A41519E5F649008775B0 /* NSData+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A41119E5F649008775B0 /* NSData+hex.m */; };
 		C527A41619E5F649008775B0 /* CBUUID+StringExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A41319E5F649008775B0 /* CBUUID+StringExtraction.m */; };
 		C527A41A19E5F76E008775B0 /* UARTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A41919E5F76E008775B0 /* UARTViewController.m */; };
+		C527A41C19E9A2FC008775B0 /* logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = C527A41B19E9A2FC008775B0 /* logo_white.png */; };
+		C527A42019E9A9D8008775B0 /* stats_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C527A41F19E9A9D8008775B0 /* stats_image.png */; };
+		C527A42319E9AEC7008775B0 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A42219E9AEC7008775B0 /* MenuViewController.m */; };
+		C527A42519E9CA07008775B0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C527A42419E9CA07008775B0 /* CFNetwork.framework */; };
+		C527A42719E9CA16008775B0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C527A42619E9CA16008775B0 /* MobileCoreServices.framework */; };
 		C5F0D35F19E05281005F3C4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D35E19E05281005F3C4C /* main.m */; };
 		C5F0D36219E05281005F3C4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36119E05281005F3C4C /* AppDelegate.m */; };
 		C5F0D36519E05281005F3C4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36419E05281005F3C4C /* ViewController.m */; };
@@ -54,6 +59,12 @@
 		C527A41319E5F649008775B0 /* CBUUID+StringExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+StringExtraction.m"; sourceTree = "<group>"; };
 		C527A41819E5F76E008775B0 /* UARTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTViewController.h; sourceTree = "<group>"; };
 		C527A41919E5F76E008775B0 /* UARTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UARTViewController.m; sourceTree = "<group>"; };
+		C527A41B19E9A2FC008775B0 /* logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_white.png; sourceTree = "<group>"; };
+		C527A41F19E9A9D8008775B0 /* stats_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stats_image.png; sourceTree = "<group>"; };
+		C527A42119E9AEC7008775B0 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		C527A42219E9AEC7008775B0 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		C527A42419E9CA07008775B0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C527A42619E9CA16008775B0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C5F0D35919E05281005F3C4C /* BlueTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F0D35D19E05281005F3C4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5F0D35E19E05281005F3C4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -74,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C527A42719E9CA16008775B0 /* MobileCoreServices.framework in Frameworks */,
+				C527A42519E9CA07008775B0 /* CFNetwork.framework in Frameworks */,
 				C527A40919E5E0EA008775B0 /* Foundation.framework in Frameworks */,
 				C527A40719E5E0E1008775B0 /* UIKit.framework in Frameworks */,
 				C527A40519E5E0CC008775B0 /* CoreGraphics.framework in Frameworks */,
@@ -108,6 +121,8 @@
 		C5F0D35019E05281005F3C4C = {
 			isa = PBXGroup;
 			children = (
+				C527A42619E9CA16008775B0 /* MobileCoreServices.framework */,
+				C527A42419E9CA07008775B0 /* CFNetwork.framework */,
 				C5F0D35B19E05281005F3C4C /* BlueTable */,
 				C5F0D37219E05281005F3C4C /* BlueTableTests */,
 				C5F0D35A19E05281005F3C4C /* Products */,
@@ -140,6 +155,8 @@
 				C527A40C19E5F612008775B0 /* UARTPeripheral.m */,
 				C527A41819E5F76E008775B0 /* UARTViewController.h */,
 				C527A41919E5F76E008775B0 /* UARTViewController.m */,
+				C527A42119E9AEC7008775B0 /* MenuViewController.h */,
+				C527A42219E9AEC7008775B0 /* MenuViewController.m */,
 				C5F0D36619E05281005F3C4C /* Main.storyboard */,
 				C527A3FE19E5DA24008775B0 /* LaunchImage.storyboard */,
 				C5F0D36919E05281005F3C4C /* Images.xcassets */,
@@ -151,6 +168,8 @@
 		C5F0D35C19E05281005F3C4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C527A41F19E9A9D8008775B0 /* stats_image.png */,
+				C527A41B19E9A2FC008775B0 /* logo_white.png */,
 				C527A40019E5DCB4008775B0 /* launchImage.png */,
 				C5F0D35D19E05281005F3C4C /* Info.plist */,
 				C5F0D35E19E05281005F3C4C /* main.m */,
@@ -255,8 +274,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C527A41C19E9A2FC008775B0 /* logo_white.png in Resources */,
 				C527A40119E5DCB4008775B0 /* launchImage.png in Resources */,
 				C527A3FF19E5DA24008775B0 /* LaunchImage.storyboard in Resources */,
+				C527A42019E9A9D8008775B0 /* stats_image.png in Resources */,
 				C5F0D36819E05281005F3C4C /* Main.storyboard in Resources */,
 				C5F0D36A19E05281005F3C4C /* Images.xcassets in Resources */,
 			);
@@ -277,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C527A41519E5F649008775B0 /* NSData+hex.m in Sources */,
+				C527A42319E9AEC7008775B0 /* MenuViewController.m in Sources */,
 				C5F0D36519E05281005F3C4C /* ViewController.m in Sources */,
 				C527A41A19E5F76E008775B0 /* UARTViewController.m in Sources */,
 				C5F0D36219E05281005F3C4C /* AppDelegate.m in Sources */,

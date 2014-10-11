@@ -21,6 +21,7 @@
     CBCentralManager    *cm;
     UIAlertView         *currentAlertView;
     UARTPeripheral      *currentPeripheral;
+    BOOL                isConnectedToTable;
     
 }
             
@@ -35,6 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    _UserId = @"test1234";
+    
     //make status bar white
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
@@ -45,6 +48,8 @@
     _connectionStatus = ConnectionStatusDisconnected;
     currentAlertView = nil;
     
+    isConnectedToTable = false;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,29 +59,29 @@
 
 
 - (IBAction)connectButton:(id)sender {
-    NSLog(@"Starting UART Mode …");
-    _connectionMode = ConnectionModeUART;
+    if(!isConnectedToTable){
+        NSLog(@"Starting UART Mode …");
+        _connectionMode = ConnectionModeUART;
     
-    _connectionStatus = ConnectionStatusScanning;
+        _connectionStatus = ConnectionStatusScanning;
+        
+        [self scanForPeripherals];
     
-    [self scanForPeripherals];
+        currentAlertView = [[UIAlertView alloc]initWithTitle:@"Scanning tables..."
+                                                     message:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:nil];
     
-    currentAlertView = [[UIAlertView alloc]initWithTitle:@"Scanning tables..."
-                                                 message:nil
-                                                delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:nil];
-    
-    [currentAlertView show];
+        [currentAlertView show];
+        [sender setTitle:@"Leave table" forState:UIControlStateNormal];
+        isConnectedToTable = true;
+    } else {
+        [self disconnect];
+        [sender setTitle:@"Connect to table to order" forState:UIControlStateNormal];
+        isConnectedToTable = false;
+    }
 
-}
-
-- (IBAction)sendDataTestButton:(id)sender {
-    
-    NSString *newString = @"UserId";
-    NSData *data = [NSData dataWithBytes:newString.UTF8String length:newString.length];
-    [self sendData:data];
-    
 }
 
 
@@ -267,6 +272,14 @@
                                                     encoding:NSUTF8StringEncoding];
         NSLog(@"Received: %@",newString);
         _receiveLabel.text = newString;
+        
+        //send user to menuViewcontroller
+        //_menuViewController = [[MenuViewController alloc] init];
+        //[_navController pushViewController:_menuViewController animated:YES];
+        
+        MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuViewController"];
+        menuViewController.tableId = newString;
+        [self.navigationController pushViewController:menuViewController animated:YES];
     }
 }
 

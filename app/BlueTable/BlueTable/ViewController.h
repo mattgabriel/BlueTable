@@ -10,8 +10,11 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "UARTPeripheral.h"
 #import "UARTViewController.h"
+#import "MenuViewController.h"
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate, CBCentralManagerDelegate, UARTPeripheralDelegate>
+
+@property (strong, nonatomic) NSString *UserId;
 
 typedef enum {
     ConnectionModeNone  = 0,
@@ -29,8 +32,11 @@ typedef enum {
 @property (nonatomic, assign) ConnectionStatus                  connectionStatus;
 
 - (IBAction)connectButton:(id)sender;
-- (IBAction)sendDataTestButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *receiveLabel;
+
+@property (strong, nonatomic) IBOutlet MenuViewController *menuViewController;
+@property (strong, nonatomic) IBOutlet UINavigationController   *navController;
+
 
 @end
 
