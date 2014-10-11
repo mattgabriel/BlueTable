@@ -117,7 +117,7 @@ abstract class restService {
                 $clean_input[$k] = $this->_cleanInputs($v);
             }
         } else {
-            $clean_input = trim(strip_tags(add_slashes($data)));
+            $clean_input = trim(strip_tags(addslashes($data)));
         }
         return $clean_input;
     }
@@ -163,11 +163,11 @@ abstract class restService {
             parse_str($_SERVER['QUERY_STRING'], $querystring);
         }
         
-        $parameters[ParamTypes::QUERY_STR] = $querystring;
+        $parameters[ParamTypes::QUERY_STR] = $this->_cleanInputs($querystring);
  
         //Get payload info
         $payload = ($_POST ? $_POST : file_get_contents("php://input"));
-        $parameters[ParamTypes::PAYLOAD] = json_decode($payload);
+        $parameters[ParamTypes::PAYLOAD] = $this->_cleanInputs(json_decode($payload));
         
         //Parse uri params for query strings
         if(isset($uriParams))
@@ -176,7 +176,7 @@ abstract class restService {
             array_pop($uriParams);
             $uriParams[] = $lastelem;
         }
-        $parameters[ParamTypes::URI_PARAMS] = $uriParams;
+        $parameters[ParamTypes::URI_PARAMS] = $this->_cleanInputs($uriParams);
         
         $this->_parameters = $parameters;
     }
