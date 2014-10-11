@@ -35,10 +35,9 @@ abstract class controllerObject {
     private function _loadView()
     {
         $viewCodeClass = VIEW_NAME . 'Code';
-        
-        if(file_exists(VIEW_DIR.'/'.$viewCodeClass.'.php'))
+        if(file_exists(VIEW_DIR . '.php'))
         {
-            require_once VIEW_DIR.'/'.$viewCodeClass.'.php';
+            require_once VIEW_DIR . '.php';
             $this->_view = new $viewCodeClass();
         }
         else
