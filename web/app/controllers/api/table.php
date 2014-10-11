@@ -22,7 +22,8 @@ class table extends restService {
             else
                 echo TableModel::TABLE_STATUS_ERROR;
         }
-        echo 'Invalid URL';
+        else
+            echo 'Invalid URL';
     }
 
     protected function _setServiceName() {
