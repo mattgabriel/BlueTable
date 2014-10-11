@@ -28,7 +28,7 @@ class order extends restService {
         }
     }
     
-    public function postMenuItemInOrder($params)
+    public function postMenuiteminorder($params)
     {
         $args = $params[ParamTypes::PAYLOAD];
         if (!empty($args)) {
@@ -41,7 +41,7 @@ class order extends restService {
         }
     }
     
-    public function getPricePerOrder($params) {
+    public function getPriceperorder($params) {
         $args = $params[ParamTypes::URI_PARAMS];
         $orderId = $args[0];
         if (!empty($args)) {
