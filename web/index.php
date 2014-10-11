@@ -75,12 +75,12 @@ function getdbh() {
 
 function __autoload($classname) {
   $a=$classname[0];
-  if ($a >= 'A' && $a <='Z')
+  if ($a >= 'A' && $a <='Z') {
     require_once(APP_PATH.'models/'.$classname.'.php');
+  }
   else
     require_once(APP_PATH.'helpers/'.$classname.'.php');  
 }
-
 
 //===============================================
 // Start the controller

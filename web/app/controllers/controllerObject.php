@@ -24,27 +24,30 @@ abstract class controllerObject {
         $fn = $obj->getFileName();  
         if($fn)
         {
-            define('PAGE_NAME', basename($fn, '.php'));
-            define('PAGE_PATH', substr($fn,strrpos($fn,APP_PATH.'controllers') + strlen(APP_PATH.'controllers'), -strlen('.php')));
-            define('VIEW_DIR', substr(str_replace('controllers','views',substr($fn,strrpos($fn,APP_PATH.'controllers'))), 0, -strlen('.php')));
-            define('VIEW_NAME', get_called_class());
+            @define('PAGE_NAME', basename($fn, '.php'));
+            @define('PAGE_PATH', substr($fn,strrpos($fn,APP_PATH.'controllers') + strlen(APP_PATH.'controllers'), -strlen('.php')));
+            @define('VIEW_DIR', substr(str_replace('controllers','views',substr($fn,strrpos($fn,APP_PATH.'controllers'))), 0, -strlen('.php')));
+            @define('VIEW_NAME', get_called_class());
         }
         return $fn;
     }
     
     private function _loadView()
     {
-        $viewCodeClass = VIEW_NAME . 'Code';
+        $viewCodeClass = VIEW_NAME;
+         
         if(file_exists(VIEW_DIR . '.php'))
         {
             require_once VIEW_DIR . '.php';
-            $this->_view = new $viewCodeClass();
+            //$this->_view = new $viewCodeClass();
         }
-        else
+        else {
+            
             $this->_view = new View(VIEW_DIR.'/'.VIEW_NAME.'.php');
+        }
     }
     
-    public function __construct() {
+    public function __construct($params = array()) {
         $this->_loadConstants();
         $this->_setComponentName();
         $this->_loadView();
