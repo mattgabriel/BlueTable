@@ -166,7 +166,7 @@ abstract class restService {
         $parameters[ParamTypes::QUERY_STR] = $this->_cleanInputs($querystring);
  
         //Get payload info
-        $payload = ($_POST ? $_POST : file_get_contents("php://input"));
+        $payload = (isset($_POST) ? $_POST : file_get_contents("php://input"));
         $parameters[ParamTypes::PAYLOAD] = json_decode($payload);
         
         //Parse uri params for query strings
