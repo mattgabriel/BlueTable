@@ -67,7 +67,8 @@ abstract class restService {
         return $fn;
     }
 
-    public function __construct() {
+    public function __construct($params) {
+        if(!empty($params)){$this->_function = $params[0];}
         $this->_loadConstants();
         $this->_setServiceName();
 
@@ -81,11 +82,11 @@ abstract class restService {
         
     }
 
-    private function callMethod($param) {
-        $methodToCall = $this->_getMethodName($this->method, get_class());
+    private function callMethod($payload) {
+        $methodToCall = $this->_getMethodName($this->method, $this->_function);
         if (method_exists($this, $methodToCall)) {
             try{
-                $this->{$methodToCall}($param);
+                $this->{$methodToCall}($payload);
             }
             catch(Exception $e){
                 $this->_generateResponse('Error', ResponseCode::INT_SERVER_ERROR);
@@ -126,22 +127,22 @@ abstract class restService {
     private function _performRequest() {
         switch ($this->method) {
             case 'DELETE':
-                $params = $this->_cleanInputs($_GET);
-                $this->callMethod($params);
+                $payload = $this->_cleanInputs($_GET);
+                $this->callMethod($payload);
                 break;
             case 'POST':
-                $params = $this->_cleanInputs($_POST);
-                $this->callMethod($params);
+                $payload = $this->_cleanInputs($_POST);
+                $this->callMethod($payload);
                 //call user method?
                 break;
             case 'GET':
-                $params = $this->_cleanInputs($_GET);
-                $this->callMethod($params);
+                $payload = $this->_cleanInputs($_GET);
+                $this->callMethod($payload);
                 break;
             case 'PUT':
-                $params = $this->_cleanInputs($_GET);
+                $payload = $this->_cleanInputs($_GET);
                 //$this->file = file_get_contents("php://input");
-                $this->callMethod($params);
+                $this->callMethod($payload);
                 break;
             default:
                 $this->_generateResponse('Invalid Method', ResponseCode::METHOD_NOT_ALLOWED);
