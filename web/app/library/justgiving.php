@@ -94,7 +94,8 @@ class justgiving {
         return $this->_request->generateRequest($this->_endpoint.$service.$options, 'GET',$headers);
     }
     
-    public function postDonation(){
+    public function donate($cost){
+        return 'Successfully donated £' . $cost;
         //Check if paypal was successful
         //If so -- donation was posted
         //otherwise donation failed
