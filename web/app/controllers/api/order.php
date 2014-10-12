@@ -30,7 +30,7 @@ class order extends restService {
             {
                 $uatm->UserId = $orderCreationParams['UserId'];
                 $uatm->TableId = $orderCreationParams['TableId'];
-                $uatm->Status = UserAtTableModel::TABLE_STATUS_SITTING;
+                $uatm->TableStatus = UserAtTableModel::TABLE_STATUS_SITTING;
                 $uatm->SeatedTime = date('Y-m-d H:i:s');
                 $uatm->insert($uatm);
             }
