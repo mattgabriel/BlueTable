@@ -85,7 +85,7 @@ class order extends restService {
         }
     }
     
-    public function putConcludeorder($params) {
+    public function postConcludeorder($params) {
         $args = (array)$params[ParamTypes::PAYLOAD];
         $orderId = $args['OrderId'];
         if ($orderId) {
