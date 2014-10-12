@@ -15,7 +15,7 @@ class restRequest {
     public function __construct() {
     }
     
-    public function generateRequest($url, $httpmethod, $headers, $data='')
+    public function generateRequest($url, $httpmethod, $headers='', $data='')
     {
         // Set the HTTP request authentication headers
         $context_options = array(

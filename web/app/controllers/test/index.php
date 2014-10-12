@@ -9,8 +9,7 @@ class index extends controllerObject{
         
     }
     function __construct() {
-        $pp = new paypal();
-        $pp->getUserInfo();
+        $jg = new justgiving();
     }
 
 }
