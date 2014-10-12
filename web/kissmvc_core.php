@@ -259,7 +259,9 @@ abstract class KISS_Model  {
     $stmt = $dbh->prepare($sql);
     $i=0;
     foreach ($this->rs as $k => $v)
-      $stmt->bindValue(++$i,is_scalar($v) ? $v : ($this->COMPRESS_ARRAY ? gzdeflate(serialize($v)) : serialize($v)) );
+    {
+        if(isset($v)){$stmt->bindValue(++$i,is_scalar($v) ? $v : ($this->COMPRESS_ARRAY ? gzdeflate(serialize($v)) : serialize($v)));}
+    }
     $stmt->bindValue(++$i,$this->rs[$this->pkname]);
     return $stmt->execute();
   }
