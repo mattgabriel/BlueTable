@@ -9,13 +9,17 @@ class order extends restService {
     
     public function postOrder($params)
     {
-        $orderCreationParams = $params[ParamTypes::PAYLOAD];
+        $orderCreationParams = (array)$params[ParamTypes::PAYLOAD];
         if (!empty($orderCreationParams)) {
             
             $orderModel = new OrderModel();
             $orderModel->OrderId = $orderCreationParams['OrderId'];
             $orderModel->UserId = $orderCreationParams['UserId'];
             $orderModel->TableId = $orderCreationParams['TableId'];
+            $orderModel->Date =  date('Y-m-d H:i:s');
+            $orderModel->TotalPrice =  0;
+            $orderModel->RestaurantId =  'rest1234';
+            $orderModel->MenuItemsIds = '';
             $result = $orderModel->insert($orderModel);
             
             if (!empty($result)) {
@@ -30,11 +34,13 @@ class order extends restService {
     
     public function postMenuiteminorder($params)
     {
-        $args = $params[ParamTypes::PAYLOAD];
+        $args = (array)$params[ParamTypes::PAYLOAD];
         if (!empty($args)) {
             $menuItemInOrder = new MenuItemInOrder();
-            $menuItemInOrder->OrderId = $args['OrderId'];
-            $menuItemInOrder->MenuItemId = $args['MenuItemId'];
+            $menuItemInOrder->OrderId = 
+                    $args['OrderId'];
+            $menuItemInOrder->MenuItemId = 
+                    $args['MenuItemId'];
             $menuItemInOrder->insert($menuItemInOrder);
         } else {
             echo 'Bad payload';
@@ -42,16 +48,40 @@ class order extends restService {
     }
     
     public function getPriceperorder($params) {
-        $args = $params[ParamTypes::URI_PARAMS];
-        $orderId = $args[0];
-        if (!empty($args)) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $orderId = $args['OrderId'];
+        if ($orderId) {
             $menuItemInOrder = new MenuItemInOrder();
             $priceResult = $menuItemInOrder->getTotalPriceForOrder($orderId);
-            if (!empty($priceResult)) {
-                echo $priceResult['getTotalPriceForOrder'];
+            if (!empty($priceResult[0]['TotalPrice'])) {
+                echo $priceResult[0]['TotalPrice'];
             }
         } else {
-            echo 'Invalid URL';
+            echo 'Bad payload';
+        }
+    }
+    
+    public function deleteRemoveorderitems($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $orderId = $args['OrderId'];
+        if ($orderId) {
+            $menuItemInOrder = new MenuItemInOrder();
+            $menuItemInOrder->deleteItemsByOrder($orderId);
+        } else {
+            echo 'Bad payload';
+        }
+    }
+    
+    public function putConcludeorder($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $orderId = $args['OrderId'];
+        if ($orderId) {
+            $orderModel = new OrderModel();
+            $orderModel->closeOrder($orderId);
+            
+            
+        } else {
+            echo 'Bad payload';
         }
     }
 

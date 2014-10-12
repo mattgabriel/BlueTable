@@ -184,8 +184,7 @@ abstract class KISS_Model  {
   }
 
   function set($key, $val) {
-    if (isset($this->rs[$key]))
-      $this->rs[$key] = $val;
+    $this->rs[$key] = $val;
     return $this;
   }
 
