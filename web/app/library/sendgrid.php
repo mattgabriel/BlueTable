@@ -20,7 +20,7 @@ class sendgrid {
         $header[] = 'Content-type: application/x-www-form-urlencoded';
         $data = 'api_user='.$this->_user
                 .  '&api_key='.$this->_pass
-                .  '&to[]=brian@excelwithbusiness.com'
+                .  '&to[]=matt@excelwithbusiness.com'
                 .  '&toname[]=Matt'
                 .  '&subject=Receipt -- Thank you'
                 .  '&text=' . $body
