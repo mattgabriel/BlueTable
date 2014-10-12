@@ -14,7 +14,7 @@ html,body { margin:0px; padding:0; height:100%; min-height:100%; }
 ul, li { list-style:none; }
 p { font-family:helvetica,arial; font-size:0.8em; color:#333; padding:10px; }
 
-#freeTableDiv li, #occupiedTableDiv li { width:200px; height:200px; background-color:#ddd; border-radius:400px; margin:50px 20px; box-shadow:rgba(0,0,0,0.2)5px 5px 20px; }
+#freeTableDiv li, #occupiedTableDiv li { padding:20px; width:200px; height:200px; background-color:#ddd; border-radius:400px; margin:50px 20px; box-shadow:rgba(0,0,0,0.2)5px 5px 20px; }
 
 #priceIn p { color:#fff; font-size:1.0em; }
 
