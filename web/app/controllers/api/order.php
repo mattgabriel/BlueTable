@@ -4,6 +4,7 @@ require_once 'restService.php';
 require_once APP_PATH . 'models/OrderModel.php';
 require_once APP_PATH . 'models/MenuItemInOrderModel.php';
 require_once APP_PATH . 'models/MenuItemModel.php';
+require_once APP_PATH . 'models/UserAtTable.php';
 
 class order extends restService {
     
@@ -21,6 +22,18 @@ class order extends restService {
             $orderModel->RestaurantId =  'rest1234';
             $orderModel->MenuItemsIds = '';
             $result = $orderModel->insert($orderModel);
+            
+            $uatm = new UserAtTableModel();
+            $hasRow = !empty($uatm->getTableByTableId($orderCreationParams['TableId']));
+            
+            if(!$hasRow)
+            {
+                $uatm->UserId = $orderCreationParams['UserId'];
+                $uatm->TableId = $orderCreationParams['TableId'];
+                $uatm->Status = UserAtTableModel::TABLE_STATUS_SITTING;
+                $uatm->SeatedTime = date('Y-m-d H:i:s');
+                $uatm->insert($uatm);
+            }
             
             if (!empty($result)) {
                 echo 'Order has been created.';

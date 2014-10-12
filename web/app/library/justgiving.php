@@ -1,25 +1,22 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'restRequest.php';
 
-/**
- * Description of justgiving
- *
- * @author fdevbt
- */
 class justgiving {
+    private $_endpoint = 'https://api-sandbox.justgiving.com'; //-sandbox
     private $_appid = 'cb085245';
+    private $_request = '';
     
-    public function check()
+    function __construct() {
+        $this->_request = new restRequest();
+    }
+    
+    public function check($email)
     {
-        //Check if user has a justgiving account
-        //https://api.justgiving.com/{appId}/v1/account/{email}
-        
-        //
+        $service = '/'.$this->_appid .'/v1/account/'.urlencode($email);
+        $header = array();
+        $header[] = 'Content-type: application/json';
+        $response = $this->_request->generateRequest($this->_endpoint.$service, 'GET', $header);
     }
     
     public function create()
@@ -77,24 +74,27 @@ class justgiving {
         }*/
     }
     
-    public function listCharities(){
-        //Get user inerests https://api.justgiving.com/{appId}/v1/account/interest
-        //https://api.justgiving.com/{appId}/v1/onesearch
-        /*q (String)
-        Your search term or terms
-        g (Boolean)
-        Allows you to group search results by index
-        i (String)
-        Narrow search results by index: Charity, Event, Fundraiser, Globalproject, LocalProject
-        limit (Integer (32bit))
-        Maximum number of search results to return
-        offset (Integer (32bit))
-        The result paging offset
-        country (String)
-        Two letter ISO country code for localised results*/
+    private function getInterests(){
+        $service = '/'.$this->_appid.'/v1/account/interest';
+        $header = array();
+        $header[] = 'Content-type: application/json';
+        $header[] = 'Authorization:Basic ' . base64_encode('thai1@ualberta.ca:Blu3Tabl3');
+        $response = $this->_request->generateRequest($this->_endpoint.$service, 'GET', $header);
+        return $response;
     }
     
-    public function postDonation(){
+    public function listCharities(){
+        //$interests = $this->getInterests();
+        $interests = array();
+        $service = '/'.$this->_appid.'/v1/charity/search';
+        $options = '?pageSize=1&q='.implode(',',$interests);
+        $headers = array();
+        $headers[] = 'Content-type: application/json';
+        return $this->_request->generateRequest($this->_endpoint.$service.$options, 'GET',$headers);
+    }
+    
+    public function donate($cost){
+        return 'Successfully donated £' . $cost;
         //Check if paypal was successful
         //If so -- donation was posted
         //otherwise donation failed
