@@ -4,7 +4,7 @@ require_once 'restService.php';
 require_once APP_PATH . 'models/OrderModel.php';
 require_once APP_PATH . 'models/MenuItemInOrderModel.php';
 require_once APP_PATH . 'models/MenuItemModel.php';
-require_once APP_PATH . 'models/UserAtTable.php';
+require_once APP_PATH . 'models/UserAtTableModel.php';
 
 class order extends restService {
     
@@ -61,7 +61,7 @@ class order extends restService {
     }
     
     public function getPriceperorder($params) {
-        $args = (array)$params[ParamTypes::PAYLOAD];
+        $args = (array)$params[ParamTypes::QUERY_STR];
         $orderId = $args['OrderId'];
         if ($orderId) {
             $menuItemInOrder = new MenuItemInOrder();
@@ -112,6 +112,17 @@ class order extends restService {
 
     protected function _setServiceName() {
         
+    }
+    
+    public function postRemoveusersfromtable($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $userId = $args['UserId'];
+        if ($userId) {
+            $userModel = new UserModel();
+            $userModel->deleteUsersAtTable($userId);
+        } else {
+            echo 'Bad payload';
+        }
     }
 
 }
