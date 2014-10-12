@@ -144,7 +144,6 @@ void loop() {
         case 6:
             blinkCurrentOption = 2;
             Serial.println("Awaiting cleaning");
-            needToPrintReceipt = false;
             break;
         }
     }
