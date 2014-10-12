@@ -12,7 +12,7 @@ class paypal {
     function __construct() {
         $this->_request = new restRequest();
         $this->_token = $this->getToken();
-        $this->getPayments();
+        $this->pay();
     }
     
     public function login()
@@ -43,61 +43,6 @@ class paypal {
     public function getPayments()
     {
         //get paypal payments related to restaurants
-        $service = '/v1/payments/payment';
-        
-        $headers = array();
-        $headers[] = "Content-Type:application/json";
-        $headers[] = "Authorization: Bearer ".$this->_token;
-        
-        $payment = new stdClass();
-        $payment->intent = 'sale';
-        
-        $payer = new stdClass();
-        $payer->payment_method = 'credit_card';
-        
-        $credit_card = new stdClass();
-        $credit_card->number = '4137356119963118';
-        $credit_card->type = 'visa';
-        $credit_card->expire_month = '10';
-        $credit_card->expire_year = '2019';
-        $credit_card->cvv2 = '999';
-        $credit_card->first_name = 'Matias';
-        $credit_card->last_name = 'Martire';
-        
-        
-        $address = new stdClass();
-        $address->line1 = 'test';
-        $address->city = 'london';
-        $address->postal_code = 'NW95ZW';
-        $address->country_code = 'UK';
-        $credit_card->billing_address = $address;
-        
-        $fi = new stdClass();
-        $fi->credit_card = $credit_card;
-        
-        $payer->funding_instruments = array($fi);
-        $payment->payer = $payer;
-        
-        $bill_details = new stdClass();
-        $bill_details->tax = '0.03';
-        $bill_details->shipping = '0';
-        $bill_details->subtotal = '7.41';
-        
-        $bill = new stdClass();
-        $bill->total = '7.47';
-        $bill->currency = 'GBP';
-        $bill->details = $bill_details;
-        
-        $transaction = new stdClass();
-        $transaction->amount = $bill;
-        $transaction->description = 'test';
-        
-        $payment->transactions = array($transaction);
-        
-        $data = json_encode($payment);
-        
-        $response = $this->_request->generateRequest($this->_endpoint.$service, 'POST', $headers, $data);
-        var_dump($response);
     }
     
     public function getUserInfo()
@@ -124,33 +69,55 @@ class paypal {
         $service = '/v1/payments/payment';
         
         $headers = array();
-        $headers[] = 'Content-Type: application/json';
-        $headers[] = 'Authorization: Bearer ' . $this->_token;
+        $headers[] = "Content-type: application/json";
+        $headers[] = "Authorization: Bearer ".$this->_token;
         
-        $data = new stdClass();
-        $data->intent = 'sale';
+        $address = new stdClass();
+        $address->line1 = 'test';
+        $address->city = 'london';
+        $address->postal_code = 'NW9 5ZW';
+        $address->country_code = 'UK';
         
-        /*curl -v https://api.sandbox.paypal.com/v1/payments/payment \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <Access-Token>' \
--d '{
-  "intent":"sale",
-  "redirect_urls":{
-    "return_url":"http://example.com/your_redirect_url.html",
-    "cancel_url":"http://example.com/your_cancel_url.html"
-  },
-  "payer":{
-    "payment_method":"paypal"
-  },
-  "transactions":[
-    {
-      "amount":{
-        "total":"7.47",
-        "currency":"USD"
-      }
-    }
-  ]
-}'*/
+        $credit_card = new stdClass();
+        $credit_card->number = '4137356119963118';
+        $credit_card->type = 'visa';
+        $credit_card->expire_month = '10';
+        $credit_card->expire_year = '2019';
+        $credit_card->cvv2 = '999';
+        $credit_card->first_name = 'Test';
+        $credit_card->last_name = 'Test';
+        $credit_card->billing_address = $address;
+        
+        $fi = new stdClass();
+        $fi->credit_card = $credit_card;
+        
+        $payer = new stdClass();
+        $payer->payment_method = 'credit_card';
+        $payer->funding_instruments = array($fi);
+        
+        $bill_details = new stdClass();
+        $bill_details->tax = '0.03';
+        $bill_details->shipping = '0';
+        $bill_details->subtotal = '7.41';
+        
+        $bill = new stdClass();
+        $bill->total = '7.47';
+        $bill->currency = 'GBP';
+        $bill->details = $bill_details;
+        
+        $transaction = new stdClass();
+        $transaction->amount = $bill;
+        $transaction->description = 'test';
+        
+        $payment = new stdClass();
+        $payment->payer = $payer;
+        $payment->intent = 'sale';
+        $payment->transactions = array($transaction);
+        
+        $data = json_encode($payment);
+        
+        $response = $this->_request->generateRequest($this->_endpoint.$service, 'POST', $headers, $data);
+        var_dump($response);
     }
     
     public function getConsent()

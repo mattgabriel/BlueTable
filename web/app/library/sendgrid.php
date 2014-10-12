@@ -23,7 +23,7 @@ class sendgrid {
                 .  '&to[]=brian@excelwithbusiness.com'
                 .  '&toname[]=Matt'
                 .  '&subject=Receipt -- Thank you'
-                .  '&text=Thank you for using BlueTable.'
+                .  '&text=' . $body
                 .  '&from=noreply@bluetable.com';
         
         $response = $this->_request->generateRequest($this->_endpoint.$service, 'POST',$header,$data);
