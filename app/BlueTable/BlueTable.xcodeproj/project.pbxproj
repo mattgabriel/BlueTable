@@ -41,6 +41,8 @@
 		C527A45B19E9E080008775B0 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A44A19E9E080008775B0 /* UIImageView+WebCache.m */; };
 		C527A45C19E9E080008775B0 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A44C19E9E080008775B0 /* UIView+WebCacheOperation.m */; };
 		C527A45F19E9E11D008775B0 /* BlurImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C527A45E19E9E11D008775B0 /* BlurImage.m */; };
+		C56EE03619EA2FD600DF7BAE /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C56EE03519EA2FD600DF7BAE /* PayViewController.m */; };
+		C56EE03919EA328100DF7BAE /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C56EE03819EA328100DF7BAE /* SuccessViewController.m */; };
 		C5F0D35F19E05281005F3C4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D35E19E05281005F3C4C /* main.m */; };
 		C5F0D36219E05281005F3C4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36119E05281005F3C4C /* AppDelegate.m */; };
 		C5F0D36519E05281005F3C4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36419E05281005F3C4C /* ViewController.m */; };
@@ -120,6 +122,10 @@
 		C527A44C19E9E080008775B0 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		C527A45D19E9E11D008775B0 /* BlurImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurImage.h; sourceTree = "<group>"; };
 		C527A45E19E9E11D008775B0 /* BlurImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurImage.m; sourceTree = "<group>"; };
+		C56EE03419EA2FD600DF7BAE /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
+		C56EE03519EA2FD600DF7BAE /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
+		C56EE03719EA328100DF7BAE /* SuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
+		C56EE03819EA328100DF7BAE /* SuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		C5F0D35919E05281005F3C4C /* BlueTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F0D35D19E05281005F3C4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5F0D35E19E05281005F3C4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -252,6 +258,10 @@
 				C527A41919E5F76E008775B0 /* UARTViewController.m */,
 				C527A42119E9AEC7008775B0 /* MenuViewController.h */,
 				C527A42219E9AEC7008775B0 /* MenuViewController.m */,
+				C56EE03719EA328100DF7BAE /* SuccessViewController.h */,
+				C56EE03819EA328100DF7BAE /* SuccessViewController.m */,
+				C56EE03419EA2FD600DF7BAE /* PayViewController.h */,
+				C56EE03519EA2FD600DF7BAE /* PayViewController.m */,
 				C527A42819E9D29F008775B0 /* DropsTableViewCell.h */,
 				C527A42919E9D29F008775B0 /* DropsTableViewCell.m */,
 				C5F0D36619E05281005F3C4C /* Main.storyboard */,
@@ -407,11 +417,13 @@
 				C527A45B19E9E080008775B0 /* UIImageView+WebCache.m in Sources */,
 				C527A45019E9E080008775B0 /* SDWebImageCompat.m in Sources */,
 				C527A41A19E5F76E008775B0 /* UARTViewController.m in Sources */,
+				C56EE03919EA328100DF7BAE /* SuccessViewController.m in Sources */,
 				C527A45119E9E080008775B0 /* SDWebImageDecoder.m in Sources */,
 				C527A45819E9E080008775B0 /* UIImage+MultiFormat.m in Sources */,
 				C527A45919E9E080008775B0 /* UIImage+WebP.m in Sources */,
 				C527A45F19E9E11D008775B0 /* BlurImage.m in Sources */,
 				C527A45319E9E080008775B0 /* SDWebImageDownloaderOperation.m in Sources */,
+				C56EE03619EA2FD600DF7BAE /* PayViewController.m in Sources */,
 				C527A45C19E9E080008775B0 /* UIView+WebCacheOperation.m in Sources */,
 				C527A45219E9E080008775B0 /* SDWebImageDownloader.m in Sources */,
 				C527A45719E9E080008775B0 /* UIImage+GIF.m in Sources */,
