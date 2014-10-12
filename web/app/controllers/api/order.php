@@ -61,7 +61,7 @@ class order extends restService {
     }
     
     public function getPriceperorder($params) {
-        $args = (array)$params[ParamTypes::PAYLOAD];
+        $args = (array)$params[ParamTypes::QUERY_STR];
         $orderId = $args['OrderId'];
         if ($orderId) {
             $menuItemInOrder = new MenuItemInOrder();
