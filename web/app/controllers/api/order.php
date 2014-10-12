@@ -93,7 +93,7 @@ class order extends restService {
             $orderModel = new OrderModel();
             $orderModel->closeOrder($orderId);
             $sg = new sendgrid();
-            $sg->send('<html><body><h2 style="font-color:blue">Thank you for using BlueTable! Have a nice day!</h2></body></html>');
+            $sg->send('Thank you for using BlueTable! Have a nice day!');
         } else {
             echo 'Bad payload';
         }
