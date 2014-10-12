@@ -23,7 +23,13 @@ class MenuItemInOrder extends BaseModel
             INNER JOIN `Order` o
                 ON o.OrderId = miio.OrderId
             WHERE o.OrderId = '" . $orderId . "'";
-                
+        return $this->select($query);
+    }
+    
+    public function deleteItemsByOrder($orderId) {
+        $query = "
+            DELETE FROM MenuItemInOrder
+            WHERE OrderId = '" . $orderId . "'";
         return $this->select($query);
     }
 }

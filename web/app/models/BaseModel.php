@@ -33,7 +33,9 @@ abstract class BaseModel implements IDataModifier{
     
     public function insert($data)
     {
+        
         $this->resetObject();
+        
         //Set auto increment pk
         if(is_array($data)){
             $data[$this->db->getPKName()]=null;
@@ -41,7 +43,7 @@ abstract class BaseModel implements IDataModifier{
             $key = $this->db->getPKName();
             $data->$key = null;
         }
-        
+
         $this->setData($data);
         return $this->db->create();
     }
@@ -61,24 +63,28 @@ abstract class BaseModel implements IDataModifier{
     
     private function setData($data){
         //accept arrays or objects
-        if(is_array($data))
+        
+        if(is_array($data)) {
             $this->setValuesFromArray($data);
-        else if(is_a ($data, get_class($this)))
+        }
+        else if(is_a ($data, get_class($this))) {
             $this->setValuesFromObject($data);
+        }
     }
     
     // Should use html entities and addslashes before storing?
     private function setValuesFromArray($arr){
         foreach($arr as $key=>$value)
         {
-            $this->db->setobject($key, $value);
+            $this->db->set($key, $value);
         }
     }
     
     private function setValuesFromObject($obj){
+        
         foreach($this->getColumnNames() as $key)
         {
-            $this->db->setobject($key, $obj->$key);
+            $this->db->set($key, $obj->$key);
         }
     }
     

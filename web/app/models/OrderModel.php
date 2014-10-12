@@ -22,4 +22,24 @@ class OrderModel extends BaseModel
         //and function that returns the pdo handler named "getdbh"
         parent::__construct('AutoId', 'Order');
     }
+    
+    
+    public function closeOrder($orderId) {
+        $query = "
+            UPDATE `Order`
+                SET Status = " . OrderModel::STATUS_CLOSED . "
+            WHERE OrderId = '" . $orderId . "'";
+        
+        $this->select($query);
+                
+        $menuItemInOrder = new MenuItemInOrder();
+        $priceResult = $menuItemInOrder->getTotalPriceForOrder($orderId);
+        if (!empty($priceResult[0]['TotalPrice'])) {
+            $query = "
+                UPDATE `Order`
+                    SET TotalPrice = " . (double)$priceResult[0]['TotalPrice'] . "
+                WHERE OrderId = '" . $orderId . "'";
+        }
+        return $this->select($query);
+    }
 }

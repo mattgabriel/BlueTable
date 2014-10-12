@@ -42,7 +42,6 @@ class RestaurantDetails_actionsClass {
             'occupiedTables' => $occupiedTables,
             'income' => $income
         );
-        
         echo json_encode($restaurantStatus);
     }
 
