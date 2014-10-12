@@ -13,6 +13,7 @@
 }
 
 @property (strong, nonatomic) NSString *orderId;
+@property (strong, nonatomic) NSString *UserId;
 
 
 @end

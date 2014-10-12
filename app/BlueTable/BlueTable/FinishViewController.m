@@ -17,11 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _orderId = @"6808";
+    //_orderId = @"6808";
     // Do any additional setup after loading the view.
+    _UserId = @"test1234";
     
-    [self requestPOST:[NSString stringWithFormat:@"&OrderId=%@",
-                       _orderId] url:@"Concludeorder"];
+    [self requestPOST:[NSString stringWithFormat:@"OrderId=%@",
+                       _orderId] url:@"order/Concludeorder"];
+    NSLog(@"11");
     
     
 }
@@ -38,7 +40,7 @@
     // form fields are separated by an ampersand. Note the absence of a
     // leading ampersand.
     NSString *bodyData = query; //@"name=Jane+Doe&address=123+Main+St";
-    
+    NSLog(@"22");
     NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://104.130.141.81/api/%@",url]]];
     
     // Create the NSMutableData to hold the received data.
@@ -49,7 +51,7 @@
     [postRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     // Designate the request a POST request and specify its body data
-    [postRequest setHTTPMethod:@"PUT"];
+    [postRequest setHTTPMethod:@"POST"];
     [postRequest setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String] length:strlen([bodyData UTF8String])]];
     
     // Initialize the NSURLConnection and proceed as described in
@@ -102,6 +104,12 @@
     //NSLog(@"%@",string);
     
     if(responseData){
+        NSLog(@"33");
+        
+        [self requestPOST:[NSString stringWithFormat:@"UserId=%@",
+                           _UserId] url:@"order/Removeusersfromtable"];
+        
+        
         responseData = nil;
       }
     

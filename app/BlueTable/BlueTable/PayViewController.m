@@ -27,8 +27,8 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //FinishViewController *transferViewController = segue.destinationViewController;
-    //transferViewController.orderId = _orderId;
+    FinishViewController *transferViewController = segue.destinationViewController;
+    transferViewController.orderId = _orderId;
 }
 
 

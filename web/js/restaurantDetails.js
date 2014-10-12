@@ -13,7 +13,7 @@ function checkRestaurantStatus() {
             console.log(tablesResult);
             for (var i = 0; i < tablesResult['freeTables'].length; i++) {
                 freeTablesReport += '<li>';
-                freeTablesReport += ' Table ' + tablesResult['freeTables'][i].TableNumber + ' is free';
+                freeTablesReport += '</p> Table ' + tablesResult['freeTables'][i].TableNumber + ' is free</p>';
                 freeTablesReport += '</li>';
             }
 
@@ -22,8 +22,8 @@ function checkRestaurantStatus() {
             
             for (var i = 0; i < tablesResult['occupiedTables'].length; i++) {
                 occupiedTablesReport += '<li>';
-                occupiedTablesReport += ' Table ' + tablesResult['occupiedTables'][i].TableNumber + ' is occupied by ' + tablesResult['occupiedTables'][i].Username;
-                occupiedTablesReport += '</li>';
+                occupiedTablesReport += '<p> Table ' + tablesResult['occupiedTables'][i].TableNumber + ' is occupied by ' + tablesResult['occupiedTables'][i].Username;
+                occupiedTablesReport += '</p></li>';
             }
 
             occupiedTablesReport += '</ul>';
@@ -32,8 +32,8 @@ function checkRestaurantStatus() {
             
             for (var i = 0; i < tablesResult['income'].length; i++) {
                 todaysIncome += '<li>';
-                todaysIncome += ' Order of ' + tablesResult['income'][i].TotalPrice + ' at table ' + tablesResult['income'][i].TableNumber + ' was paid by ' + tablesResult['income'][i].Username;
-                todaysIncome += '</li>';
+                todaysIncome += '<p> Order of &pound;' + tablesResult['income'][i].TotalPrice + ' at table ' + tablesResult['income'][i].TableNumber + ' was paid by ' + tablesResult['income'][i].Username;
+                todaysIncome += '</p></li>';
             }
 
             todaysIncome += '</ul>';

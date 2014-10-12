@@ -525,10 +525,10 @@
             </objects>
             <point key="canvasLocation" x="3231" y="140"/>
         </scene>
-        <!--View Controller-->
+        <!--Finish View Controller-->
         <scene sceneID="P0C-gM-62L">
             <objects>
-                <viewController id="lya-zO-wIJ" sceneMemberID="viewController">
+                <viewController id="lya-zO-wIJ" customClass="FinishViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bQe-3M-vfb"/>
                         <viewControllerLayoutGuide type="bottom" id="AXF-Pq-Hp4"/>
