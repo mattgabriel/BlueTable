@@ -4,7 +4,7 @@ require_once 'restService.php';
 require_once APP_PATH . 'models/OrderModel.php';
 require_once APP_PATH . 'models/MenuItemInOrderModel.php';
 require_once APP_PATH . 'models/MenuItemModel.php';
-require_once APP_PATH . 'models/UserAtTable.php';
+require_once APP_PATH . 'models/UserAtTableModel.php';
 
 class order extends restService {
     
