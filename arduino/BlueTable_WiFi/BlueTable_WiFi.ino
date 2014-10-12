@@ -91,6 +91,7 @@ void loop() {
   
   if(needToPrintReceipt){
     printReceipt();
+    needToPrintReceipt = false;
   }
   
   
