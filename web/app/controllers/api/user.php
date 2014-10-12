@@ -15,15 +15,4 @@ class user extends restService {
         $charity = $jg->listCharities();
         echo json_encode($charity);
     }
-    
-    public function postRemoveusersfromtable($params) {
-        $args = (array)$params[ParamTypes::PAYLOAD];
-        $userId = $args['UserId'];
-        if ($userId) {
-            $userModel = new UserModel();
-            $userModel->deleteUsersAtTable($userId);
-        } else {
-            echo 'Bad payload';
-        }
-    }
 }

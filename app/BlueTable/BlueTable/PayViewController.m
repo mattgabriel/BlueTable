@@ -7,6 +7,7 @@
 //
 
 #import "PayViewController.h"
+#import "FinishViewController.h"
 
 @implementation PayViewController
 
@@ -25,7 +26,11 @@
 }
 
 
-//
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    FinishViewController *transferViewController = segue.destinationViewController;
+    transferViewController.orderId = _orderId;
+}
+
 
 - (void)requestGET {
    

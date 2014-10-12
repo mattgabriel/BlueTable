@@ -240,9 +240,18 @@
     [alert show];
 }
 
+-(NSString*)generateRandomString:(int)num {
+    NSMutableString* string = [NSMutableString stringWithCapacity:num];
+    for (int i = 0; i < num; i++) {
+        [string appendFormat:@"%C", (unichar)('a' + arc4random_uniform(25))];
+    }
+    return string;
+}
+
 
 - (void)didReceiveData:(NSData*)newData{
-    NSString *randomOrderId = [NSString stringWithFormat:@"%i",rand()%10000+1];
+    //NSString *randomOrderId = [NSString stringWithFormat:@"%i",rand()%10000+1];
+    NSString* randomOrderId = [self generateRandomString:5];
     //Data incoming from UART peripheral
     
     //Debug
