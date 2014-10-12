@@ -80,7 +80,6 @@ class justgiving {
         $header[] = 'Content-type: application/json';
         $header[] = 'Authorization:Basic ' . base64_encode('thai1@ualberta.ca:Blu3Tabl3');
         $response = $this->_request->generateRequest($this->_endpoint.$service, 'GET', $header);
-        
         return $response;
     }
     
