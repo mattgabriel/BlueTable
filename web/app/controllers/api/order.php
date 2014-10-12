@@ -100,5 +100,16 @@ class order extends restService {
     protected function _setServiceName() {
         
     }
+    
+    public function postRemoveusersfromtable($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $userId = $args['UserId'];
+        if ($userId) {
+            $userModel = new UserModel();
+            $userModel->deleteUsersAtTable($userId);
+        } else {
+            echo 'Bad payload';
+        }
+    }
 
 }

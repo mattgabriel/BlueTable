@@ -5,10 +5,6 @@ require_once APP_PATH . 'models/UserModel.php';
 require_once APP_PATH . 'library/justgiving.php';
 
 class user extends restService {
-    function __construct($params){
-        parent::__construct($params);
-    }
-    
     protected function _setServiceName() {
         
     }
@@ -18,5 +14,16 @@ class user extends restService {
         $jg = new justgiving();
         $charity = $jg->listCharities();
         echo json_encode($charity);
+    }
+    
+    public function postRemoveusersfromtable($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $userId = $args['UserId'];
+        if ($userId) {
+            $userModel = new UserModel();
+            $userModel->deleteUsersAtTable($userId);
+        } else {
+            echo 'Bad payload';
+        }
     }
 }

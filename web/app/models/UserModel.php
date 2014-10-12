@@ -17,4 +17,11 @@ class UserModel extends BaseModel
         //and function that returns the pdo handler named "getdbh"
         parent::__construct('AutoId','User');
     }
+    
+    public function deleteUsersAtTable($userId) {
+        $query = "
+            DELETE FROM UserAtTable
+            WHERE UserId = '" . $userId . "'";
+        return $this->select($query);
+    }
 }
