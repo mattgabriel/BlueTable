@@ -14,8 +14,10 @@
 
 @property (strong, nonatomic) NSString *UserId;
 @property (strong, nonatomic) NSString *tableId;
+@property (strong, nonatomic) NSString *orderId;
+//@property (strong, nonatomic) NSMutableArray *menuData;
 
-@property (nonatomic, strong) NSMutableArray *menuData;
+@property (strong, nonatomic) UIView *selectedItemOverlay;
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 

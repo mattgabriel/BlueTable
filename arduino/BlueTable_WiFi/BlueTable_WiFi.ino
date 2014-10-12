@@ -101,7 +101,7 @@ void loop() {
     char c = client.read();
     receivedData = receivedData + c;
     // Delete HTTP headers
-    if(receivedData.endsWith("Content-Type: text/html")){
+    if(receivedData.endsWith("Content-Type: application/json")){
       receivedData = "";
     }
     isData = true;
@@ -159,7 +159,7 @@ void httpRequest() {
   if (client.connect(server, 80)) {
     Serial.println("connecting...");
     // send the HTTP PUT request:
-    client.println("GET /table/Status/table14 HTTP/1.1");
+    client.println("GET /api/table/status/table14 HTTP/1.1");
     client.println("Host: www.104.130.141.81");
     client.println("Connection: close");
     client.println();

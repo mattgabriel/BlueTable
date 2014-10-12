@@ -12,7 +12,9 @@
 #import "UARTViewController.h"
 #import "MenuViewController.h"
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate, CBCentralManagerDelegate, UARTPeripheralDelegate>
+@interface ViewController : UIViewController <UINavigationControllerDelegate, CBCentralManagerDelegate, UARTPeripheralDelegate, NSURLConnectionDelegate> {
+    NSMutableData *responseData;
+}
 
 @property (strong, nonatomic) NSString *UserId;
 
