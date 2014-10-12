@@ -32,4 +32,14 @@ class MenuItemInOrder extends BaseModel
             WHERE OrderId = '" . $orderId . "'";
         return $this->select($query);
     }
+    
+    public function returnListOfItemsForOrder($orderId) {
+        $query = "
+            SELECT *
+            FROM MenuItemInOrder miio
+            INNER JOIN MenuItem mi
+                ON miio.MenuItemId = mi.MenuItemId
+            WHERE miio.OrderId = '" . $orderId . "'";
+        return $this->select($query);
+    }
 }

@@ -84,6 +84,18 @@ class order extends restService {
             echo 'Bad payload';
         }
     }
+    
+    public function getListofitemsfororder($params) {
+        $args = (array)$params[ParamTypes::PAYLOAD];
+        $orderId = $args['OrderId'];
+        if ($orderId) {
+            $menuItemInOrder = new MenuItemInOrder();
+            $itemsForOrder = $menuItemInOrder->returnListOfItemsForOrder($orderId);
+            return json_encode($itemsForOrder);
+        } else {
+            echo 'Bad payload';
+        }
+    }
 
     protected function _setServiceName() {
         
