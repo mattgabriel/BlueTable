@@ -242,7 +242,7 @@
 
 
 - (void)didReceiveData:(NSData*)newData{
-    
+    NSString *randomOrderId = [NSString stringWithFormat:@"%i",rand()%10000+1];
     //Data incoming from UART peripheral
     
     //Debug
@@ -272,8 +272,6 @@
                                                     encoding:NSUTF8StringEncoding];
         NSLog(@"Received: %@",newString);
         _receiveLabel.text = newString;
-        
-        NSString *randomOrderId = [NSString stringWithFormat:@"%i",rand()%10000+1];
         
         
         

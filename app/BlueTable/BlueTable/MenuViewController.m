@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "DropsTableViewCell.h"
+#import "SuccessViewController.h"
 
 //loads images in a separate thread
 #import "UIImageView+WebCache.h"
@@ -72,6 +73,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SuccessViewController *transferViewController = segue.destinationViewController;
+    transferViewController.UserId = _UserId;
+    transferViewController.orderId = _orderId;
+    transferViewController.tableId = _tableId;
+}
+
 
 
 

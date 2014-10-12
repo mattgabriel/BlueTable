@@ -11,17 +11,17 @@ class table extends restService {
         $ids = $params[ParamTypes::URI_PARAMS];
         if(!empty($ids)){
             $tableid = $ids[0];
-            $model = new TableModel();
+            $model = new UserAtTableModel();
             $data = $model->getTableByTableId($tableid);
             if(!empty($data))
             {
                 $row = $data[0];
                 echo $row->TableStatus;
-                if($row->TableStatus == TableModel::TABLE_STATUS_PAID)
-                    $model->update(array('AutoId'=>$row->AutoId, 'TableStatus'=>TableModel::TABLE_STATUS_AWAITING_CLEANING));
+                if($row->TableStatus == UserAtTableModel::TABLE_STATUS_PAID)
+                    $model->update(array('AutoId'=>$row->AutoId, 'TableStatus'=>UserAtTableModel::TABLE_STATUS_AWAITING_CLEANING));
             }
             else
-                echo TableModel::TABLE_STATUS_ERROR;
+                echo TableModel::TABLE_STATUS_AVAILABLE;
         }
         else
             echo 'Invalid URL';
@@ -33,11 +33,14 @@ class table extends restService {
         if(!empty($args))
         {
             $model = new UserAtTableModel();
-            $model->TableId = $args['TableId'];
-            $model->UserId = $args['UserId'];
-            $model->SeatedTime = date('Y-m-d H:i:s');
-            $model->Status = TableModel::TABLE_STATUS_SITTING;
-            $model->insert($model);
+            $tables = $model->getTableByTableId($args['TableId']);
+            foreach($tables as $table)
+            {
+                $uatm = new UserAtTableModel();
+                $uatm->AutoId = $table->AutoId;
+                $uatm->TableStatus = UserAtTableModel::TABLE_STATUS_PAID;
+                $model->update($uatm);
+            }
         }
         else
             echo 'Bad payload';

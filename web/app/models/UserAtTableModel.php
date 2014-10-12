@@ -9,7 +9,16 @@ class UserAtTableModel extends BaseModel
     public $UserId;
     public $TableId;
     public $SeatedTime;
-    public $Status;
+    public $TableStatus;
+    
+    CONST TABLE_STATUS_AVAILABLE = 0;
+    CONST TABLE_STATUS_SITTING = 1;
+    CONST TABLE_STATUS_DRINKS_SERVED = 2;
+    CONST TABLE_STATUS_FOOD_SERVED = 3;
+    CONST TABLE_STATUS_DESSERT_SERVED = 4;
+    CONST TABLE_STATUS_PAID = 5;
+    CONST TABLE_STATUS_AWAITING_CLEANING = 6;
+    CONST TABLE_STATUS_ERROR = 99;
 	
     public function __construct() {
         //call parent with primary key name "AutoId", table name "Users"
@@ -29,5 +38,13 @@ class UserAtTableModel extends BaseModel
                      ON C.MenuId = D.MenuId
                      WHERE A.UserID = "'.$userid.'"');
         return $this->select($qb->get());
+    }
+    
+    public function getTableByTableId($TableId)
+    {
+        $qb = new QueryBuilder();
+        $qb->select('*')->from('UserAtTable')->where('TableId = "'.$TableId.'"');
+        $data = $this->select($qb->get());
+        return $this->arr2obj($data);
     }
 }
