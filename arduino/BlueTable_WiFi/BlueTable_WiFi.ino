@@ -113,33 +113,41 @@ void loop() {
    int myData =  receivedData.toInt();
    //Serial.println(receivedData); 
    isData = false;
-   if(myData == 0){
-      blinkCurrentOption = 0;
-      Serial.println("Table available"); 
-   } else if(myData == 1){
-      blinkCurrentOption = 1;
-      Serial.println("Table taken");
-   } else if(myData == 2){
-      blinkCurrentOption = 1;
-      Serial.println("Drinks served");
-   } else if(myData == 3){
-      blinkCurrentOption = 1;
-      Serial.println("Food served");
-   } else if(myData == 4){
-      blinkCurrentOption = 1;
-      Serial.println("Dessert served");
-   } else if(myData == 5){
-      blinkCurrentOption = 2;
-      Serial.println("Payed");
-      needToPrintReceipt = true;
-   } else if(myData == 6){
-      blinkCurrentOption = 2;
-      Serial.println("Awaiting cleaning");
-      needToPrintReceipt = false;
-   } else {
-      blinkCurrentOption = 2;
-      Serial.println("Unknown"); 
-   }
+   if(myData > blinkCurrentOption || myData == 0)
+   {
+        switch(myData) {
+        case 0:
+            blinkCurrentOption = 0;
+            Serial.println("Table available");
+            break;
+        case 1:
+            blinkCurrentOption = 1;
+            Serial.println("Table taken");
+            break;
+        case 2:
+            blinkCurrentOption = 1;
+            Serial.println("Drinks served");
+            break;
+        case 3:
+            blinkCurrentOption = 1;
+            Serial.println("Food served");
+            break;
+        case 4:
+            blinkCurrentOption = 1;
+            Serial.println("Dessert served");
+            break;
+        case 5:
+            blinkCurrentOption = 2;
+            Serial.println("Payed");
+            needToPrintReceipt = true;
+            break;
+        case 6:
+            blinkCurrentOption = 2;
+            Serial.println("Awaiting cleaning");
+            needToPrintReceipt = false;
+            break;
+        }
+    }
   }
 
   // if ten seconds have passed since your last connection,
