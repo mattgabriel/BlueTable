@@ -93,4 +93,10 @@ class justgiving {
         country (String)
         Two letter ISO country code for localised results*/
     }
+    
+    public function postDonation(){
+        //Check if paypal was successful
+        //If so -- donation was posted
+        //otherwise donation failed
+    }
 }
