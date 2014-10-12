@@ -38,7 +38,7 @@ class table extends restService {
             {
                 $uatm = new UserAtTableModel();
                 $uatm->AutoId = $table->AutoId;
-                $uatm->Status = UserAtTableModel::TABLE_STATUS_PAID;
+                $uatm->TableStatus = UserAtTableModel::TABLE_STATUS_PAID;
                 $model->update($uatm);
             }
         }

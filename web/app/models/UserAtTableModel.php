@@ -9,7 +9,7 @@ class UserAtTableModel extends BaseModel
     public $UserId;
     public $TableId;
     public $SeatedTime;
-    public $Status;
+    public $TableStatus;
     
     CONST TABLE_STATUS_AVAILABLE = 0;
     CONST TABLE_STATUS_SITTING = 1;
