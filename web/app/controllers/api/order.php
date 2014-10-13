@@ -5,6 +5,7 @@ require_once APP_PATH . 'models/OrderModel.php';
 require_once APP_PATH . 'models/MenuItemInOrderModel.php';
 require_once APP_PATH . 'models/MenuItemModel.php';
 require_once APP_PATH . 'models/UserAtTableModel.php';
+require_once APP_PATH . 'library/sendgrid.php';
 
 class order extends restService {
     
@@ -91,8 +92,8 @@ class order extends restService {
         if ($orderId) {
             $orderModel = new OrderModel();
             $orderModel->closeOrder($orderId);
-            
-            
+            $sg = new sendgrid();
+            $sg->send('Thank you for using BlueTable! Have a nice day!');
         } else {
             echo 'Bad payload';
         }
