@@ -54,6 +54,7 @@
 		C56EE05319EA52FF00DF7BAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C56EE05219EA52FF00DF7BAE /* Security.framework */; };
 		C56EE05519EA530E00DF7BAE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C56EE05419EA530E00DF7BAE /* SystemConfiguration.framework */; };
 		C56EE05819EA5B8100DF7BAE /* FinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C56EE05719EA5B8100DF7BAE /* FinishViewController.m */; };
+		C56EE05A19EA7CAA00DF7BAE /* imaging.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C56EE05919EA7CAA00DF7BAE /* imaging.jpg */; };
 		C5F0D35F19E05281005F3C4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D35E19E05281005F3C4C /* main.m */; };
 		C5F0D36219E05281005F3C4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36119E05281005F3C4C /* AppDelegate.m */; };
 		C5F0D36519E05281005F3C4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F0D36419E05281005F3C4C /* ViewController.m */; };
@@ -156,6 +157,7 @@
 		C56EE05419EA530E00DF7BAE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C56EE05619EA5B8100DF7BAE /* FinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishViewController.h; sourceTree = "<group>"; };
 		C56EE05719EA5B8100DF7BAE /* FinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishViewController.m; sourceTree = "<group>"; };
+		C56EE05919EA7CAA00DF7BAE /* imaging.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imaging.jpg; sourceTree = "<group>"; };
 		C5F0D35919E05281005F3C4C /* BlueTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F0D35D19E05281005F3C4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5F0D35E19E05281005F3C4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		C5F0D35C19E05281005F3C4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C56EE05919EA7CAA00DF7BAE /* imaging.jpg */,
 				C527A45D19E9E11D008775B0 /* BlurImage.h */,
 				C527A45E19E9E11D008775B0 /* BlurImage.m */,
 				C527A41F19E9A9D8008775B0 /* stats_image.png */,
@@ -451,6 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C56EE05A19EA7CAA00DF7BAE /* imaging.jpg in Resources */,
 				C527A41C19E9A2FC008775B0 /* logo_white.png in Resources */,
 				C527A40119E5DCB4008775B0 /* launchImage.png in Resources */,
 				C527A3FF19E5DA24008775B0 /* LaunchImage.storyboard in Resources */,

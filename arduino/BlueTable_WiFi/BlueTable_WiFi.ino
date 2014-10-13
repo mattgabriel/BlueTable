@@ -13,10 +13,10 @@ Adafruit_Thermal printer(printer_RX_Pin, printer_TX_Pin);
 //Printer ends
 
  
-//char ssid[] = "BattleHack";      //  your network SSID (name)
-//char pass[] = "paypal14";   // your network password
-char ssid[] = "MattGabriel";      //  your network SSID (name)
-char pass[] = "matt1234";
+char ssid[] = "BattleHack";      //  your network SSID (name)
+char pass[] = "paypal14";   // your network password
+//char ssid[] = "MattGabriel";      //  your network SSID (name)
+//char pass[] = "matt1234";
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 
 int status = WL_IDLE_STATUS;
@@ -37,7 +37,7 @@ int tableLed = 4;
 unsigned long blinkLastMillis = 0;
 unsigned long blinkSpeed = 500;
 int blinkLastState = 0;
-int blinkCurrentOption = 2;
+int blinkCurrentOption = 0;
 
 int numberOfBytesReceived = 0;
 String receivedString = "";
@@ -113,6 +113,12 @@ void loop() {
    int myData =  receivedData.toInt();
    //Serial.println(receivedData); 
    isData = false;
+   
+   if(myData < blinkCurrentOption && myData == 0){
+      needToPrintReceipt = true;
+    }
+    
+    
    if(myData > blinkCurrentOption || myData == 0)
    {
         switch(myData) {
@@ -139,11 +145,12 @@ void loop() {
         case 5:
             blinkCurrentOption = 2;
             Serial.println("Payed");
-            needToPrintReceipt = true;
+            //needToPrintReceipt = true;
             break;
         case 6:
             blinkCurrentOption = 2;
             Serial.println("Awaiting cleaning");
+            //needToPrintReceipt = true;
             break;
         }
     }
